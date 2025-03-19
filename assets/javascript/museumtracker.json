@@ -1,0 +1,11 @@
+{
+    "name": "MusuemTracker: Tracking the favorite museusm app",
+    "short_name": "MT",
+    "description": "Securely and confidentially track your favorite jokes.",
+    "start_url": " https://solace.ist.rit.edu/~nic4340/252/projectpwa/",
+    "theme_color": "#1976d2",
+    "background_color": "#fafafa",
+    "display": "standalone"
+}
+
+// write out the const for the templates based on the sections
