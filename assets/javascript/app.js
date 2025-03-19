@@ -93,3 +93,33 @@ function deleteJoke(id) {
       console.log("Error deleting joke: ", event.target.error);
     };
   } //deleteJoke
+
+  async function getUserData(){
+    try{
+        const url= 'https://dummyjson.com/users';
+        const userInfo= await fetch(url);
+        const userData=await userInfo.json();
+        console.log(userData);
+        userData.users.forEach(user=> createUser(user));
+    } catch (error){
+        console.log("Error fetching user data: ",error);
+    }
+}
+
+
+//function to create user template
+function createUser(user){
+   console.log(user);
+   console.log(user.image);
+   let template= `
+    <div class="card">
+        <img class="user-photo" src=${user.image} alt="User Photo"/>
+        <h2 class="name"> ${user.firstName} ${user.lastName}</h2>
+        <h3 class="property-name"> Company: ${user.company.name} </h3>
+        <h3 class="property-name"> Contact Info: <p> Phone Number: ${user.phone}<br> Email: ${user.email}</p></h3>
+    </div>`;
+    
+    document.getElementById("container").insertAdjacentHTML("beforeend",template); 
+}
+
+getUserData();
