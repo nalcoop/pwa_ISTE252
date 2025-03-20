@@ -279,4 +279,4 @@ function createMuseumCard(){
     
     document.getElementById("card").insertAdjacentHTML("beforeend",template); 
 }
- createMuseumCard();
+createMuseumCard();
