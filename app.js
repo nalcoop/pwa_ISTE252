@@ -151,26 +151,26 @@ for (let i = 0; i < len; i++) {
 let heroIndex=0;
 changeSlide();
 
-// function changeSlide() {
-//   let i;
-//   const carousel = document.getElementsByClassName("hero-images");
-//   let dots= document.getElementsByClassName("indicator");
-//   for(i=0; i<carousel.length; i++){
-//     carousel[i].style.display="none";
-//   }
-//   heroIndex++;
+function changeSlide() {
+  let i;
+  const carousel = document.getElementsByClassName("hero-images");
+  let dots= document.getElementsByClassName("indicator");
+  for(i=0; i<carousel.length; i++){
+    carousel[i].style.display="none";
+  }
+  heroIndex++;
 
-//   if(heroIndex > carousel.length){
-//    heroIndex=1;
-//   }
-//   for (i=0; i<dots.length; i++){
-//     dots[i].className= dots[i].className.replace("active","");
-//   }
-//  carousel[heroIndex-1].style.display="block";
-//  dots[heroIndex-1].className+="active";
-//  setTimeout(changeSlide,1000); //  changes it every second
+  if(heroIndex > carousel.length){
+   heroIndex=1;
+  }
+  for (i=0; i<dots.length; i++){
+    dots[i].className= dots[i].className.replace("active","");
+  }
+ carousel[heroIndex-1].style.display="block";
+ dots[heroIndex-1].className+="active";
+ setTimeout(changeSlide,1000); //  changes it every second
 
-// }
+}
 
 // fix template for the museums 
 // gather content ideas 
@@ -279,3 +279,4 @@ function createMuseumCard(){
     
     document.getElementById("card").insertAdjacentHTML("beforeend",template); 
 }
+ createMuseumCard();
