@@ -175,33 +175,15 @@ function changeSlide() {
 // fix template for the museums 
 // gather content ideas 
 // FIX THISSSSS
+
+// create the template 
 if (!recipe.recipes || recipe.recipes.length==0){
     console.error("No recipe found");
 }
 
-recipe.recipes.forEach(recipeItem =>{
-    let template= `
-    <h1> Recipe Name: <br> ${recipeItem.name}</h1>
-    <img class="recipe-photo" src=${recipeItem.image} />
-    <h2>Ingredients: </h2>
-    <ul>${recipeItem.ingredients.map(ingredients => `<li>${ingredients}</li>`).join("") }</ul>
-    <h2>Instructions: </h2>
-    <ul>${recipeItem.instructions.map(instructions=> `<li>${instructions}</li>`).join("")}</ul> 
-    <p>Prep Time Minutes: ${recipeItem.prepTimeMinutes}</p>
-    <p>Cook Time: ${recipeItem.cookTimeMinutes}</p>
-    <p>Servings: ${recipeItem.servings}</p>
-    <p>Difficulty: ${recipeItem.difficulty}</p>
-    <p>Cuisine: ${recipeItem.cuisine}</p>
-    <p>Calories Per Serving: ${recipeItem.caloriesPerServing}</p>
-    <p>Rating: ${recipeItem.rating}</p>
-    `;
-    document.getElementById("container").insertAdjacentHTML("beforeend",template); 
-});
   async function getUserData(){
     try{
-        const url= 'https://dummyjson.com/users';
-        const userInfo= await fetch(url);
-        const userData=await userInfo.json();
+        const museum=
         console.log(userData);
         userData.users.forEach(user=> createUser(user));
     } catch (error){
@@ -216,8 +198,7 @@ function createUser(user){
    console.log(user.image);
    let template= `
     <div class="card">
-        <img class="user-photo" src=${user.image} alt="User Photo"/>
-        <h2 class="name"> ${user.firstName} ${user.lastName}</h2>
+        <h1 class="name"> ${user.firstName} ${user.lastName}</h1>
         <h3 class="property-name"> Company: ${user.company.name} </h3>
         <h3 class="property-name"> Contact Info: <p> Phone Number: ${user.phone}<br> Email: ${user.email}</p></h3>
     </div>`;
