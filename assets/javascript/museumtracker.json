@@ -51,18 +51,18 @@
         },
         {
             "id":7,
-            "Name":"", 
-            "Address":"",
-            "Website":"",
-            "Brief Description":""
+            "Name":"Maryland Science Center", 
+            "Address":"601 Light St, Baltimore, MD 21230",
+            "Website":"https://www.mdsci.org/",
+            "Brief Description":"The Maryland Science Center is focused on teaching the multidisciplinary fashions of science. Located in the Baltimore Inner Harbor, the Science Center aims to promote learning science in an interactive, fun for all ages way. The Science Center explores many of the disciplines of science such as paleontology, chemistry, environmental, astronomy and more. Established in 1797, the Science Center has been expanding and teaching the sciences to those who attend for ages."
 
         },
         {
             "id":8,
-            "Name":"", 
-            "Address":"",
-            "Website":"",
-            "Brief Description":""
+            "Name":"B&O Railroad Museum", 
+            "Address":"901 W Pratt St, Baltimore, MD 21223",
+            "Website":"https://www.borail.org/",
+            "Brief Description":"The B&O Railroad Museum is focused on teaching the history of the American railroad system, in the birthplace of the nation’s first mile of commercial railroad. Conveniently located in Baltimore’s Mount Clare neighborhood, the B&O Railroad brings light to the history of the railroad system by showing artifacts of the evolution of railroading. The B&O goes above and beyond to ensure the enjoyment of the museum by including a public park located right across the street. Established almost 200 years ago, the B&O Railroad has continued to uphold its foundational values."
 
         },
         {
