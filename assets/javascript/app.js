@@ -58,8 +58,8 @@ function getAllJokes() {
   
       request.onsuccess = function (event) {
         db = event.target.result;
-        const transaction = db.transaction("jokeData", "readonly");
-        const objectStore = transaction.objectStore("jokeData");
+        const transaction = db.transaction("museumData", "readonly");
+        const objectStore = transaction.objectStore("museumData");
         const objects = [];
         objectStore.openCursor().onsuccess = (event) => {
           const cursor = event.target.result;
@@ -82,8 +82,8 @@ function getAllJokes() {
 //   to remove the favorite sites
 function deleteJoke(id) {
     console.log(db);
-    const transaction = db.transaction(["jokeData"], "readwrite");
-    const objectStore = transaction.objectStore("jokeData");
+    const transaction = db.transaction(["museumData"], "readwrite");
+    const objectStore = transaction.objectStore("museumData");
     const request = objectStore.delete(id);
     request.onsuccess = function (event) {
       console.log("Joke deleted successfully");
