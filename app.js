@@ -277,6 +277,6 @@ function createMuseumCard(){
         <p class="about"> ${museum.Description}
     </div>`;
     
-    document.getElementsByClassName("card").insertAdjacentHTML("beforeend",template); 
+    document.querySelectorAll("card").insertAdjacentHTML("beforeend",template); 
 }
 createMuseumCard();
