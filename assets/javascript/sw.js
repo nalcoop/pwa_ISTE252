@@ -4,6 +4,10 @@ const VERSION = "v1";
 //offline resources list
 const APP_STATIC_RESOURCES = [
   "index.html",
+  "artMuseums.html",
+  "memorabiliaMuseums.html",
+  "educationalMuseums.html",
+  "favPage.html",
   "style.css",
   "app.js",
   "museumtracker.json",
@@ -113,7 +117,7 @@ self.addEventListener("fetch", (event) => {
 
   function addDataToIndexedDB(data) {
     return new Promise((resolve, reject) => {
-      const request = indexedDB.open("JokesDatabase", 1);
+      const request = indexedDB.open("MuseumDatabase", 1);
   
       request.onerror = (event) => {
         reject("IndexedDB error: " + event.target.error);
@@ -125,11 +129,11 @@ self.addEventListener("fetch", (event) => {
         const objectStore = transaction.objectStore("museumData");
   
         //Add each joke
-        data.jokes.forEach((joke) => {
+        data.museums.forEach((museum) => {
           let myuuid = crypto.randomUUID();
-          joke.id = myuuid;
-          console.log(joke);
-          objectStore.add(joke);
+          museum.id = myuuid;
+          console.log(museum);
+          objectStore.add(museum);
         });
         transaction.oncomplete = () => resolve();
         transaction.onerror = (event) =>
