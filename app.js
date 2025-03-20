@@ -267,7 +267,7 @@ if (!museum.museums || museum.museums.length==0){
 }
 
 //function to create user template
-function createMuseumCard(){
+
   museum.museums.forEach(museumItem=>{
     console.log(museumItem);
     let template= `
@@ -279,5 +279,5 @@ function createMuseumCard(){
     </div>`;
     document.querySelectorAll("card").insertAdjacentHTML("beforeend",template); 
   });
-}
-createMuseumCard();
+
+
