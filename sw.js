@@ -187,7 +187,7 @@ self.addEventListener("fetch", (event) => {
 
         }      
     ]
-}
+};
 
   function fetchMuseums(){
     fetch(museum)
