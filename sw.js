@@ -8,7 +8,7 @@ const APP_STATIC_RESOURCES = [
   "memorabiliaMuseums.html",
   "educationalMuseums.html",
   "favPage.html",
-  "assets\css\style.css",
+  "style.css",
   "app.js",
   "museumtracker.json",
 ];
@@ -26,8 +26,7 @@ self.addEventListener("install", (event) => {
         console.log("Resources cached successfully");
       } catch(error){
         console.log("Cached failed: ",error);
-      }
-      
+      }  
     })()
   );
 });
