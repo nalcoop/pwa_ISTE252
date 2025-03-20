@@ -20,8 +20,14 @@ let cache;
 self.addEventListener("install", (event) => {
   event.waitUntil(
     (async () => {
-      cache = await caches.open(CACHE_NAME);
-      cache.addAll(APP_STATIC_RESOURCES);
+      try{
+        cache = await caches.open(CACHE_NAME);
+        cache.addAll(APP_STATIC_RESOURCES);
+        console.log("Resources cached successfully");
+      } catch(error){
+        console.log("Cached failed: ",error);
+      }
+      
     })()
   );
 });
