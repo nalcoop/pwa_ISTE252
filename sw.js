@@ -22,8 +22,9 @@ self.addEventListener("install", (event) => {
     (async () => {
       try{
         cache = await caches.open(CACHE_NAME);
+        console.log("await is functioning");
         cache.addAll(APP_STATIC_RESOURCES);
-        console.log("Resources cached successfully");
+        console.log("add all is working");
       } catch(error){
         console.log("Cached failed: ",error);
       }  
