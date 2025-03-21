@@ -48,53 +48,6 @@ if ("serviceWorker" in navigator) {
   
   //   function call to display the museums
 
-// to create a favorite site
-function getAllJokes() {
-    return new Promise((resolve, reject) => {
-      const request = indexedDB.open(dbName);
-      request.onerror = function (event) {
-        reject(`Database error: ${event.target.error}`);
-      };
-  
-      request.onsuccess = function (event) {
-        db = event.target.result;
-        const transaction = db.transaction("museumData", "readonly");
-        const objectStore = transaction.objectStore("museumData");
-        const objects = [];
-        objectStore.openCursor().onsuccess = (event) => {
-          const cursor = event.target.result;
-          if (cursor) {
-            //add object to our array
-            objects.push(cursor.value);
-            cursor.continue();
-          } else {
-            //no more objects to iterate, resolve the promise
-            resolve(objects);
-          }
-        }; //onsuccess
-        transaction.oncomplete = () => {
-          //db.close();
-        };
-      };
-    }); //promise
-  } //getAllJokes
-  
-//   to remove the favorite sites
-function deleteJoke(id) {
-    console.log(db);
-    const transaction = db.transaction(["museumData"], "readwrite");
-    const objectStore = transaction.objectStore("museumData");
-    const request = objectStore.delete(id);
-    request.onsuccess = function (event) {
-      console.log("Joke deleted successfully");
-      renderPastJokes();
-    };
-    request.error = function (event) {
-      console.log("Error deleting joke: ", event.target.error);
-    };
-  } //deleteJoke
-
-
   //Hamburger menu open/close event listener
 let hamburger = document.getElementById('hamburger');
 let menu = document.querySelector('header nav>ul');
