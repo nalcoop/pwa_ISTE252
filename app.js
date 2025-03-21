@@ -46,53 +46,6 @@ if ("serviceWorker" in navigator) {
     }
   };
   
-  //   function call to display the museums
-
-// to create a favorite site
-function getAllJokes() {
-    return new Promise((resolve, reject) => {
-      const request = indexedDB.open(dbName);
-      request.onerror = function (event) {
-        reject(`Database error: ${event.target.error}`);
-      };
-  
-      request.onsuccess = function (event) {
-        db = event.target.result;
-        const transaction = db.transaction("museumData", "readonly");
-        const objectStore = transaction.objectStore("museumData");
-        const objects = [];
-        objectStore.openCursor().onsuccess = (event) => {
-          const cursor = event.target.result;
-          if (cursor) {
-            //add object to our array
-            objects.push(cursor.value);
-            cursor.continue();
-          } else {
-            //no more objects to iterate, resolve the promise
-            resolve(objects);
-          }
-        }; //onsuccess
-        transaction.oncomplete = () => {
-          //db.close();
-        };
-      };
-    }); //promise
-  } //getAllJokes
-  
-//   to remove the favorite sites
-function deleteJoke(id) {
-    console.log(db);
-    const transaction = db.transaction(["museumData"], "readwrite");
-    const objectStore = transaction.objectStore("museumData");
-    const request = objectStore.delete(id);
-    request.onsuccess = function (event) {
-      console.log("Joke deleted successfully");
-      renderPastJokes();
-    };
-    request.error = function (event) {
-      console.log("Error deleting joke: ", event.target.error);
-    };
-  } //deleteJoke
 
 
   //Hamburger menu open/close event listener
@@ -279,26 +232,108 @@ if (!museum.museums || museum.museums.length==0){
 document.addEventListener("DOMContentLoaded", function(){
   let currentPage= window.location.pathname.split("/").pop();
   let filterPages=[];
-  let favorites= JSON.parse(localStorage.getItem("favorites")) || [];
-  console.log(favorites);
+  let favorites= JSON.parse(indexedDB.getItem("favorites")) || [];
+  let db;
+  const dbName= "MuseumDatabase";
+  const request= indexedDB.open(dbName,1);
+    
+  request.onerror = function (event) {
+    console.error("Database error: " + event.target.error);
+  };
+  
+  request.onsuccess = function (event) {
+    db = event.target.result;
+    console.log("Database opened successfully");
+  };
 
-  //based on page
-  if (currentPage === "artMuseums.html"){
-    filterPages= museum.museums.filter(specified => specified.type==="Art");
-  }else if(currentPage === "educationalMuseums.html"){
-    filterPages= museum.museums.filter(specified => specified.type==="Education");
-  }else if(currentPage ==="memorabiliaMuseums.html"){
-    filterPages= museum.museums.filter(specified => specified.type==="Memorabilia");
-  } else if (currentPage=="favorites.html"){
-    filterPages= museum.museums.filter(specified => favorites.includes(specified.id.toString()));
-  } else{
-    filterPages= museum.museums;
+  function loadMuseums(){
+    //based on page
+    if (currentPage === "artMuseums.html"){
+      filterPages= museum.museums.filter(specified => specified.type==="Art");
+    }else if(currentPage === "educationalMuseums.html"){
+      filterPages= museum.museums.filter(specified => specified.type==="Education");
+    }else if(currentPage ==="memorabiliaMuseums.html"){
+      filterPages= museum.museums.filter(specified => specified.type==="Memorabilia");
+    } else{
+      filterPages= museum.museums;
+    }
   }
+
+  getFavorites().then(favorites=>{
+    let template="";
+    filterPages.forEach(museumItem =>{
+      let isFavorited= favorites.includes(museumItem.id.toString());
+      template+= `
+      <div class="card" data-id=""${museumItem.id}>
+          <h1 class="name"> ${museumItem.Name}</h1>
+          <h3 class="property-name"> Address: ${museumItem.Address} </h3>
+          <h3 class="property-name"> Website: <a href="${museumItem.Website}" target="_blank">${museumItem.Website}</a></h3>
+          <p class="about"> ${museumItem["Brief Description"]} </p>
+          <button class="favorite-button"> ${isFavorited ? "Remove from Favorites" : "Add to Favorites"}</button>
+      </div>`; 
+    });
+    let container= document.getElementById("museum-list") || document.querySelector(".card");
+    if(container){
+     container.innerHTML= template;
+    addFavorites();
+    } else{
+     console.error("Container not being made");
+    }
+ 
+  });
+
   
   
 
 //function to create user template
-let template="";
+
+function addFavoritesEventListeners(){
+  document.querySelectorAll(".favorite-button").forEach(button =>{
+    button.addEventListener("click", function(){
+      let card = this.closest(".card");
+      let museumId= card.dataset.id.toString();
+
+      getFavorites().then(favorites =>{
+        if(favorites.includes(museumId)){
+          removeFavorite(museumId);
+          this.textContent= "Add to Favorites";
+          console.log(favorites);
+        } else{
+          addFavoritesEventListeners(museumId);
+          this.textContent= "Remove from Favorites";
+        }
+      // removing it from the favorites
+      if(currentPage === "favorites.html"){
+        card.remove();
+      }
+    });
+  });
+  });
+}
+
+
+function loadFavorites(){
+    getFavorites().then(favoriteIds =>{
+      const transaction = db.transaction(["museumData"],"readonly");
+      const objectStore= transaction.objectStore("museumData");
+      const favoriteMuseums=[];
+
+      objectStore.openCursor().onsuccess = function(event){
+        let cursor= event.target.result;
+        if(cursor){
+          if(favoriteIds.includes(cursor.value.id.toString())){
+            favoriteMuseums.push(cursor.value);
+          }
+          cursor.continue();
+        } else{
+          displayFavorites(favoriteMuseums);
+        }
+      };
+    });
+}
+
+function displayFavorites(museums){
+  let template="";
   filterPages.forEach(museumItem =>{
     let isFavorited= favorites.includes(museumItem.id.toString());
     template+= `
@@ -310,41 +345,42 @@ let template="";
         <button class="favorite-button"> ${isFavorited ? "Remove from Favorites" : "Add to Favorites"}</button>
     </div>`; 
   });
-   let container= document.getElementById("museum-list") || document.querySelector(".card");
-   if(container){
-    container.innerHTML= template;
-   } else{
-    console.error("Container not being made");
-   }
+  let container= document.getElementById("museum-list") || document.querySelector(".card");
+  if(container){
+   container.innerHTML= template;
+   addFavoritesEventListeners();
+  } else{
+   console.error("Container not being made");
+  }
 
-  document.querySelectorAll(".favorite-button").forEach(button =>{
-    button.addEventListener("click", function(){
-      let card = this.closest(".card");
-      let museumId= card.dataset.id.toString();
+}
 
-      if (favorites.includes(museumId)){
-        //remove it
-        favorites = favorites.filter(id => id !== museumId);
-        this.textContent= "Add to Favorites";
-        console.log(favorites);
-      }else {
-        //add it 
-        favorites.push(museumId);
-        this.textContent= "Remove from Favorites";
-      }
-      localStorage.setItem("favorites", JSON.stringify(favorites));
-      console.log(favorites);
+function addFavorites(id){
+      const transaction = db.transaction(["museumData"],"readwrite");
+      const objectStore= transaction.objectStore("museumData");
+      objectStore.get(id).onsuccess= function (event) {
+        const museum= event.target.results;
+        if(museum){
+          let favorites= JSON.parse(localStorage.getItem("favorites")) || [];
+          if(!favorites.includes(id)){
+            favorites.push(id);
+            localStorage.setItem("favorites",JSON.stringify(favorites));
+          }
+        }
+      };
+}
 
-      // removing it from the favorites
-      if(currentPage === "favorites.html"){
-        card.remove();
-      }
-    });
-  });
-  });
+function removeFavorite(id){
+  let favorites= JSON.parse(localStorage.getItem("favorites")) || [];
+  favorites= favorites.filter(favoriteIds => favoriteIds !== id);
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+}
 
+function getFavorites(){
+  return new Promise((resolve,reject) => {
+    let favorites= JSON.parse(localStorage.getItem("favorites")) || [];
+    resolve(favorites);
+  })
+}
 
-
-// create templates based on the sections
-
-
+})
