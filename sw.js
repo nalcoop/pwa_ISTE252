@@ -7,7 +7,7 @@ const APP_STATIC_RESOURCES = [
   "artMuseums.html",
   "memorabiliaMuseums.html",
   "educationalMuseums.html",
-  "favPage.html",
+  "favorites.html",
   "style.css",
   "app.js",
   "museumtracker.json",
