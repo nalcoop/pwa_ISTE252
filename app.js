@@ -279,7 +279,7 @@ if (!museum.museums || museum.museums.length==0){
 document.addEventListener("DOMContentLoaded", function(){
   let currentPage= window.location.pathname.split("/").pop();
   let filterPages=[];
-  let favorites= localStorage.getItem("favorites") || [];
+  let favorites= JSON.parse(localStorage.getItem("favorites")) || [];
   console.log(favorites);
 
   //based on page
