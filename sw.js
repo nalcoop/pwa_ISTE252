@@ -190,7 +190,8 @@ self.addEventListener("fetch", (event) => {
 };
 
   function fetchMuseums(){
-    fetch(museum)
+    fetch("museumtracker.json")
+    .then(response => response.json())
     .then((data) => {
         console.log("Got Museums:", data);
         return addDataToIndexedDB(data);
