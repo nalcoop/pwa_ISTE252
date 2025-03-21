@@ -267,17 +267,13 @@ if (!museum.museums || museum.museums.length==0){
 }
 
 //function to create user template
-
-  museum.museums.forEach(museumItem=>{
-    console.log(museumItem);
-    let template= `
-    <div class="card">
-        <h1 class="name"> ${museumItem.Name}</h1>
-        <h3 class="property-name"> Address: ${museumItem.Address} </h3>
-        <h3 class="property-name"> Website: ${museumItem.Website}</p></h3>
-        <p class="about"> ${museumItem.Description} </p>
-    </div>`;
-    document.querySelectorAll("card").insertAdjacentHTML("beforeend",template); 
-  });
-
+let template= `
+<div class="card">
+    <h1 class="name"> ${museum.museums.Name}</h1>
+    <h3 class="property-name"> Address: ${museum.museums.Address} </h3>
+    <h3 class="property-name"> Website: ${museum.museums.Website}</p></h3>
+    <p class="about"> ${museum.museums.Description} </p>
+</div>`;
+console.log(template);
+document.querySelectorAll(".card").insertAdjacentHTML("beforeend",template); 
 
