@@ -325,12 +325,14 @@ let template="";
         //remove it
         favorites = favorites.filter(id => id !== museumId);
         this.textContent= "Add to Favorites";
+        console.log(favorites);
       }else {
         //add it 
         favorites.push(museumId);
         this.textContent= "Remove from Favorites";
       }
-      localStorage.setItem("favorites", JSON.stringify(favorites));
+      objectStore.setItem("favorites", JSON.stringify(favorites));
+      console.log(favorites);
 
       // removing it from the favorites
       if(currentPage === "favorites.html"){
