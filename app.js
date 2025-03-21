@@ -267,7 +267,7 @@ if (!museum.museums || museum.museums.length==0){
 }
 
 //function to create user template
-museum.museums.forEach(museumItem =>{
+museum.museums.forEach((museumItem) =>{
   let template= `
   <div class="card">
       <h1 class="name"> ${museumItem.Name}</h1>
@@ -276,7 +276,6 @@ museum.museums.forEach(museumItem =>{
       <p class="about"> ${museumItem.Description} </p>
   </div>`;
   console.log(template);
-  document.getElementById("museum-list").innerHTML=template;
   document.querySelector(".card").insertAdjacentHTML("beforeend",template); 
   
 })
