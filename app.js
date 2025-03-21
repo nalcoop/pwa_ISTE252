@@ -272,7 +272,7 @@ museum.museums.forEach((museumItem) =>{
   <div class="card">
       <h1 class="name"> ${museumItem.Name}</h1>
       <h3 class="property-name"> Address: ${museumItem.Address} </h3>
-      <h3 class="property-name"> Website: <a href="${museumItem.Website}" target="_blank"${museumItem.Website}</a></h3>
+      <h3 class="property-name"> Website: <a href="${museumItem.Website}" target="_blank">${museumItem.Website}</a></h3>
       <p class="about"> ${museumItem["Brief Description"]} </p>
   </div>`;
   console.log(template);
