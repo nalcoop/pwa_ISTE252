@@ -279,7 +279,8 @@ if (!museum.museums || museum.museums.length==0){
 document.addEventListener("DOMContentLoaded", function(){
   let currentPage= window.location.pathname.split("/").pop();
   let filterPages=[];
-  let favorites= JSON.parse(localStorage.getItem("favorites")) || [];
+  let favorites= localStorage.getItem("favorites") || [];
+  console.log(favorites);
 
   //based on page
   if (currentPage === "artMuseums.html"){
