@@ -275,7 +275,7 @@ if (!museum.museums || museum.museums.length==0){
         <h1 class="name"> ${museumItem.Name}</h1>
         <h3 class="property-name"> Address: ${museumItem.Address} </h3>
         <h3 class="property-name"> Website: ${museumItem.Website}</p></h3>
-        <p class="about"> ${museumItem.Description}
+        <p class="about"> ${museumItem.Description} </p>
     </div>`;
     document.querySelectorAll("card").insertAdjacentHTML("beforeend",template); 
   });
