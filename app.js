@@ -280,11 +280,11 @@ document.addEventListener("DOMContentLoaded", function(){
   let filterPages=[];
 
   //based on page
-  if (currentPage == 'artMuseums.html'){
+  if (currentPage === "artMuseums.html"){
     filterPages= museum.museums.filter(specified => specified.type==="Art");
-  }else if(currentPage == 'educationalMuseums.html'){
+  }else if(currentPage === "educationalMuseums.html"){
     filterPages= museum.museums.filter(specified => specified.type==="Education");
-  }else if(currentPage == 'memorabiliaMuseums.html'){
+  }else if(currentPage ==="memorabiliaMuseums.html"){
     filterPages= museum.museums.filter(specified => specified.type==="Memorabilia");
   } else {
     filterPages= museum.museums;
