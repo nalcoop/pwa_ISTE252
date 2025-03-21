@@ -279,6 +279,7 @@ if (!museum.museums || museum.museums.length==0){
 document.addEventListener("DOMContentLoaded", function(){
   let currentPage= window.location.pathname.split("/").pop();
   let filterPages=[];
+  let favorites= JSON.parse(localStorage.getItem("favorites")) || [];
 
   //based on page
   if (currentPage === "artMuseums.html"){
@@ -287,19 +288,25 @@ document.addEventListener("DOMContentLoaded", function(){
     filterPages= museum.museums.filter(specified => specified.type==="Education");
   }else if(currentPage ==="memorabiliaMuseums.html"){
     filterPages= museum.museums.filter(specified => specified.type==="Memorabilia");
-  } else {
+  } else if (currentPage=="favorites.html"){
+    filterPages= museum.museums.filter(specified => favorites.includes(specified.id.toString()));
+  } else{
     filterPages= museum.museums;
   }
+  
+  
 
 //function to create user template
 let template="";
   filterPages.forEach(museumItem =>{
+    let isFavorited= favorites.includes(museumItem.id.toString());
     template+= `
     <div class="card">
         <h1 class="name"> ${museumItem.Name}</h1>
         <h3 class="property-name"> Address: ${museumItem.Address} </h3>
         <h3 class="property-name"> Website: <a href="${museumItem.Website}" target="_blank">${museumItem.Website}</a></h3>
         <p class="about"> ${museumItem["Brief Description"]} </p>
+        <button class="favorite-button"> ${isFavorited ? "Remove from Favorites" : "Add to Favorites"}</button>
     </div>`; 
   });
    let container= document.getElementById("museum-list") || document.querySelector(".card");
@@ -309,7 +316,30 @@ let template="";
     console.error("Container not being made");
    }
 
+  document.querySelectorAll(".favorite-button").forEach(button =>{
+    button.addEventListener("click", function(){
+      let card = this.closest(".card");
+      let museumId= card.dataset.id;
+
+      if (favorites.includes(museumId)){
+        //remove it
+        favorites = favorites.filter(id => id !== museumId);
+        this.textContent= "Add to Favorites";
+      }else {
+        //add it 
+        favorites.push(museumId);
+        this.textContent= "Remove from Favorites";
+      }
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+
+      if(currentPage === "favorites.html"){
+        card.remove();
+      }
+    });
   });
+  });
+
+
 
 // create templates based on the sections
 
