@@ -331,7 +331,7 @@ let template="";
         favorites.push(museumId);
         this.textContent= "Remove from Favorites";
       }
-      objectStore.setItem("favorites", JSON.stringify(favorites));
+      localStorage.setItem("favorites", JSON.stringify(favorites));
       console.log(favorites);
 
       // removing it from the favorites
