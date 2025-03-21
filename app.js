@@ -332,6 +332,7 @@ let template="";
       }
       localStorage.setItem("favorites", JSON.stringify(favorites));
 
+      // removing it from the favorites page
       if(currentPage === "favorites.html"){
         card.remove();
       }
