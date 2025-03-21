@@ -186,7 +186,8 @@ const museum= {
             "Website": "https://thewalters.org/",
             "Brief Description": 
             "The Walters Art Museum is focused on sharing art that tells the story of diverse cultures through the millennials. Located in Baltimore's Mount Vernon community, the Walters’ utilizes its exhibits, collections and educational programs to help the youth of the city and across the world. A local free museum that houses history from multiple cultures, ranging from 19th century French & Ethiopian paintings, ancient Roman artifacts and even images of the Buddha. The Walters’ was established in 1934 “for the benefit of the public” and  has continued that mission in the current years.",
-            "type": "Art"
+            "type": "Art",
+
               
         },
         {
