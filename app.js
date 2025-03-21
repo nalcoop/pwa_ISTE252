@@ -232,7 +232,6 @@ if (!museum.museums || museum.museums.length==0){
 document.addEventListener("DOMContentLoaded", function(){
   let currentPage= window.location.pathname.split("/").pop();
   let filterPages=[];
-  let favorites= JSON.parse(indexedDB.getItem("favorites")) || [];
   let db;
   const dbName= "MuseumDatabase";
   const request= indexedDB.open(dbName,1);
