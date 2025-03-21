@@ -289,20 +289,26 @@ document.addEventListener("DOMContentLoaded", function(){
   } else {
     filterPages= museum.museums;
   }
-});
 
 //function to create user template
-museum.museums.forEach((museumItem) =>{
-  let template= `
-  <div class="card">
-      <h1 class="name"> ${museumItem.Name}</h1>
-      <h3 class="property-name"> Address: ${museumItem.Address} </h3>
-      <h3 class="property-name"> Website: <a href="${museumItem.Website}" target="_blank">${museumItem.Website}</a></h3>
-      <p class="about"> ${museumItem["Brief Description"]} </p>
-  </div>`;
-  console.log(template);
-  document.querySelector(".card").insertAdjacentHTML("beforeend",template); 
-});
+let template="";
+  filterPages.forEach(museumItem =>{
+    template+= `
+    <div class="card">
+        <h1 class="name"> ${museumItem.Name}</h1>
+        <h3 class="property-name"> Address: ${museumItem.Address} </h3>
+        <h3 class="property-name"> Website: <a href="${museumItem.Website}" target="_blank">${museumItem.Website}</a></h3>
+        <p class="about"> ${museumItem["Brief Description"]} </p>
+    </div>`; 
+  });
+   let container= document.getElementById("museum-list") || document.querySelector(".card");
+   if(container){
+    container.innerHTML= template;
+   } else{
+    console.error("Container not being made");
+   }
+
+  });
 
 // create templates based on the sections
 
