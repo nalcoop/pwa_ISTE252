@@ -274,7 +274,7 @@ document.addEventListener("DOMContentLoaded", function(){
     let container= document.getElementById("museum-list") || document.querySelector(".card");
     if(container){
      container.innerHTML= template;
-    addFavorites();
+    addFavoritesEventListeners();
     } else{
      console.error("Container not being made");
     }
@@ -298,7 +298,7 @@ function addFavoritesEventListeners(){
           this.textContent= "Add to Favorites";
           console.log(favorites);
         } else{
-          addFavoritesEventListeners();
+          addFavorites(museumId);
           this.textContent= "Remove from Favorites";
         }
       // removing it from the favorites
@@ -367,7 +367,7 @@ function addFavorites(id){
       const transaction = db.transaction(["museumData"],"readwrite");
       const objectStore= transaction.objectStore("museumData");
       objectStore.get(id).onsuccess= function (event) {
-        const museum= event.target.results;
+        const museum= event.target.result;
         if(museum){
           let favorites= JSON.parse(localStorage.getItem("favorites")) || [];
           if(!favorites.includes(id)){
