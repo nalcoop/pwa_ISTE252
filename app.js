@@ -257,6 +257,7 @@ document.addEventListener("DOMContentLoaded", function(){
       filterPages= museum.museums;
     }
   }
+  loadMuseums();
 
   getFavorites().then(favorites=>{
     let template="";
