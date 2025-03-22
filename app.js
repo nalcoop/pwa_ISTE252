@@ -291,19 +291,19 @@ function addFavoritesEventListeners(){
   document.querySelectorAll(".favorite-button").forEach(button =>{
     button.addEventListener("click", function(){
       let card = this.closest(".card");
-      let museumId= card.dataset.id.toString();
+      let museumId= card.getAttribute("data-id");
 
       getFavorites().then(favorites =>{
         if(favorites.includes(museumId)){
           removeFavorite(museumId);
-          this.textContent= "Add to Favorites";
-          console.log(favorites);
+          card.remove();
+          console.log("removed");
         } else{
           addFavorites(museumId);
           this.textContent= "Remove from Favorites";
         }
       // removing it from the favorites
-      if(currentPage === "favorites.html"){
+      if(window.location.pathname.includes("favorites.html")){
        loadFavorites();
       }
     });
@@ -349,7 +349,7 @@ function displayFavorites(museums, favoriteIds){
         <button class="favorite-button"> ${isFavorited ? "Remove from Favorites" : "Add to Favorites"}</button>
     </div>`; 
   });
-  let container= document.getElementById("museum-list") || document.querySelector(".card");
+  let container= document.getElementById("museum-list");
   if(container){
    container.innerHTML= template;
    addFavoritesEventListeners();
@@ -379,10 +379,11 @@ function addFavorites(id){
       };
 }
 
-function removeFavorite(id){
-  let favorites= JSON.parse(localStorage.getItem("favorites")) || [];
-  favorites= favorites.filter(favoriteIds => favoriteIds !== id);
-  localStorage.setItem("favorites", JSON.stringify(favorites));
+function removeFavorite(museumId){
+  getFavorites().then(favorites => {
+    let updatedFavorites= favorites.filter(id => id !== museumId);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  });
 }
 
 function getFavorites(){
