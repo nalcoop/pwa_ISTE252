@@ -27,7 +27,7 @@ if ("serviceWorker" in navigator) {
   
   request.onupgradeneeded = function (event) {
     db = event.target.result;
-    const objectStore = db.createObjectStore("muesumData", {
+    const objectStore = db.createObjectStore("museumData", {
       keyPath: "id",
     });
   };
@@ -210,7 +210,7 @@ const museum= {
             "id":9,
             "Name":"Babe Ruth Birthplace Museum", 
             "Address":"216 Emory Street, Baltimore, MD 21230",
-            "Website":":https://baberuthmuseum.org/",
+            "Website":"https://baberuthmuseum.org/",
             "Brief Description":"The Babe Ruth Birthplace Museum is home to the memorabilia of the late, great Babe Ruth. Located in downtown Baltimore, the Babe Ruth Birthplace is an educational institution that is dedicated to sharing the history and legacy of Babe Ruth. Established in 1974, the Babe Ruth Birthplace continues to preserve the legacy of Babe Ruth to all those who attend.",
             "type": "Memorabilia"
 
@@ -263,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function(){
     filterPages.forEach(museumItem =>{
       let isFavorited= favorites.includes(museumItem.id.toString());
       template+= `
-      <div class="card" data-id=""${museumItem.id}>
+      <div class="card" data-id="${museumItem.id}">
           <h1 class="name"> ${museumItem.Name}</h1>
           <h3 class="property-name"> Address: ${museumItem.Address} </h3>
           <h3 class="property-name"> Website: <a href="${museumItem.Website}" target="_blank">${museumItem.Website}</a></h3>
@@ -298,7 +298,7 @@ function addFavoritesEventListeners(){
           this.textContent= "Add to Favorites";
           console.log(favorites);
         } else{
-          addFavoritesEventListeners(museumId);
+          addFavoritesEventListeners();
           this.textContent= "Remove from Favorites";
         }
       // removing it from the favorites
@@ -325,18 +325,18 @@ function loadFavorites(){
           }
           cursor.continue();
         } else{
-          displayFavorites(favoriteMuseums);
+          displayFavorites(favoriteMuseums,favoriteIds);
         }
       };
     });
 }
 
-function displayFavorites(museums){
+function displayFavorites(museums, favoriteIds){
   let template="";
-  filterPages.forEach(museumItem =>{
-    let isFavorited= favorites.includes(museumItem.id.toString());
+  museums.forEach(museumItem =>{
+    let isFavorited= favoriteIds.includes(museumItem.id.toString());
     template+= `
-    <div class="card" data-id=""${museumItem.id}>
+    <div class="card" data-id="${museumItem.id}">
         <h1 class="name"> ${museumItem.Name}</h1>
         <h3 class="property-name"> Address: ${museumItem.Address} </h3>
         <h3 class="property-name"> Website: <a href="${museumItem.Website}" target="_blank">${museumItem.Website}</a></h3>
@@ -376,10 +376,10 @@ function removeFavorite(id){
 }
 
 function getFavorites(){
-  return new Promise((resolve,reject) => {
+  return new Promise((resolve) => {
     let favorites= JSON.parse(localStorage.getItem("favorites")) || [];
     resolve(favorites);
-  })
+  });
 }
 
 })
