@@ -359,6 +359,11 @@ function displayFavorites(museums, favoriteIds){
 }
 
 function addFavorites(id){
+  if(!db){
+    console.error("IndexedDB is not initialized yet");
+    return;
+  }
+
       const transaction = db.transaction(["museumData"],"readwrite");
       const objectStore= transaction.objectStore("museumData");
       objectStore.get(id).onsuccess= function (event) {
