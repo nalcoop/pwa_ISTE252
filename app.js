@@ -234,7 +234,7 @@ document.addEventListener("DOMContentLoaded", function(){
   let filterPages=[];
   let db;
   const dbName= "MuseumDatabase";
-  const request= indexedDB.open(dbName,1);
+
     
   request.onerror = function (event) {
     console.error("Database error: " + event.target.error);
@@ -303,7 +303,7 @@ function addFavoritesEventListeners(){
         }
       // removing it from the favorites
       if(currentPage === "favorites.html"){
-        card.remove();
+       loadFavorites();
       }
     });
   });
@@ -312,6 +312,10 @@ function addFavoritesEventListeners(){
 
 
 function loadFavorites(){
+  if(!db){
+    console.error("IndexedDB is not initialized yet");
+    return;
+  }
     getFavorites().then(favoriteIds =>{
       const transaction = db.transaction(["museumData"],"readonly");
       const objectStore= transaction.objectStore("museumData");
