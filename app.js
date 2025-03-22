@@ -234,7 +234,7 @@ document.addEventListener("DOMContentLoaded", function(){
   let filterPages=[];
   let db;
   const dbName= "MuseumDatabase";
-
+  const request= indexedDB.open(dbName,1);
     
   request.onerror = function (event) {
     console.error("Database error: " + event.target.error);
