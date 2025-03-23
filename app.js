@@ -290,7 +290,7 @@ document.addEventListener("DOMContentLoaded", function(){
 function addFavoritesEventListeners(){
   document.querySelectorAll(".favorite-button").forEach(button =>{
     button.addEventListener("click", function(){
-      let card = this.closest(".card");
+      let card = this.closest(".fav-card");
       let museumId= card.getAttribute("data-id");
 
       getFavorites().then(favorites =>{
