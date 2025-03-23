@@ -351,7 +351,7 @@ function displayFavorites(museums, favoriteIds){
         <button class="favorite-button"> ${isFavorited ? "Remove from Favorites" : "Add to Favorites"}</button>
     </div>`; 
   });
-  let container= document.getElementById("museum-list");
+  let container= document.getElementById("fav-museum-list");
   if(container){
    container.innerHTML= template;
    addFavoritesEventListeners();
