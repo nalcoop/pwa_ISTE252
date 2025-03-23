@@ -359,11 +359,11 @@ function displayFavorites(museums, favoriteIds){
 
 }
 
-function addFavorites(id){
-  if(!db){
-    console.error("IndexedDB is not initialized yet");
-    return;
-  }
+function addFavorites(museumId){
+  // if(!db){
+  //   console.error("IndexedDB is not initialized yet");
+  //   return;
+  // }
 
       // const transaction = db.transaction(["museumData"],"readwrite");
       // const objectStore= transaction.objectStore("museumData");
@@ -371,7 +371,7 @@ function addFavorites(id){
         const museum= event.target.result;
         if(museum){
           getFavorites().then(favorites =>{
-            if(!favorites.includes(id)){
+            if(!favorites.includes(museumId)){
               favorites.push(id);
               localStorage.setItem("favorites",JSON.stringify(favorites));
             }
