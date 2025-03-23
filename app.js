@@ -257,14 +257,17 @@ document.addEventListener("DOMContentLoaded", function(){
       filterPages= museum.museums;
     }
   }
-  loadMuseums();
+  if(window.location.pathname.includes("favorites.html")){
+    loadMuseums();
+  }
+
 
   getFavorites().then(favorites=>{
     let template="";
     filterPages.forEach(museumItem =>{
       let isFavorited= favorites.includes(museumItem.id.toString());
       template+= `
-      <div class="fav-card"data-id=${museumItem.id}">
+      <div class="card" data-id="${museumItem.id}">
           <h1 class="name"> ${museumItem.Name}</h1>
           <h3 class="property-name"> Address: ${museumItem.Address} </h3>
           <h3 class="property-name"> Website: <a href="${museumItem.Website}" target="_blank">${museumItem.Website}</a></h3>
@@ -272,7 +275,7 @@ document.addEventListener("DOMContentLoaded", function(){
           <button class="favorite-button"> ${isFavorited ? "Remove from Favorites" : "Add to Favorites"}</button>
       </div>`; 
     });
-    let container= document.getElementById( "fav-museum-list").querySelector(".card");
+    let container= document.getElementById("museum-list") || document.querySelector(".card");
     if(container){
      container.innerHTML= template;
     addFavoritesEventListeners();
@@ -313,12 +316,18 @@ function addFavoritesEventListeners(){
 
 
 function loadFavorites(){
-  if(!db){
-    console.error("IndexedDB is not initialized yet");
-    return;
-  }
+
     getFavorites().then(favoriteIds =>{
       let favoriteMuseums = museum.museums.filter(museumItem => favoriteIds.includes(museumItem.id.toString()));
+      if(container){
+        if(favoriteMuseums.length===0){
+          container.innerHTML=`<p class="empty-message"> You have no favorites yet. Add some museums to your favorites!</p>`;
+        } else{
+          displayFavorites(favoriteMuseums,favoriteIds);
+        }
+      } else{
+        console.error("Container with id 'museum-list' not found");
+      }
       displayFavorites(favoriteMuseums,favoriteIds);
       // const transaction = db.transaction(["museumData"],"readonly");
       // const objectStore= transaction.objectStore("museumData");
@@ -339,6 +348,7 @@ function loadFavorites(){
 }
 
 function displayFavorites(museums, favoriteIds){
+
   let template="";
   museums.forEach(museumItem =>{
     let isFavorited= favoriteIds.includes(museumItem.id.toString());
