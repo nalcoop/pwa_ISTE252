@@ -365,16 +365,19 @@ function addFavorites(id){
     return;
   }
 
-      const transaction = db.transaction(["museumData"],"readwrite");
-      const objectStore= transaction.objectStore("museumData");
+      // const transaction = db.transaction(["museumData"],"readwrite");
+      // const objectStore= transaction.objectStore("museumData");
       objectStore.get(id).onsuccess= function (event) {
         const museum= event.target.result;
         if(museum){
-          let favorites= JSON.parse(localStorage.getItem("favorites")) || [];
-          if(!favorites.includes(id)){
-            favorites.push(id);
-            localStorage.setItem("favorites",JSON.stringify(favorites));
-          }
+          getFavorites().then(favorites =>{
+            if(!favorites.includes(id)){
+              favorites.push(id);
+              localStorage.setItem("favorites",JSON.stringify(favorites));
+            }
+          });
+
+          
         }
       };
 }
