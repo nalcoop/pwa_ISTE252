@@ -318,21 +318,23 @@ function loadFavorites(){
     return;
   }
     getFavorites().then(favoriteIds =>{
-      const transaction = db.transaction(["museumData"],"readonly");
-      const objectStore= transaction.objectStore("museumData");
-      const favoriteMuseums=[];
+      let favoriteMuseums = museum.museums.filter(museumItem => favoriteIds.includes(museumItem.id.toString()));
+      displayFavorites(favoriteMuseums,favoriteIds);
+      // const transaction = db.transaction(["museumData"],"readonly");
+      // const objectStore= transaction.objectStore("museumData");
+      // const favoriteMuseums=[];
 
-      objectStore.openCursor().onsuccess = function(event){
-        let cursor= event.target.result;
-        if(cursor){
-          if(favoriteIds.includes(cursor.value.id.toString())){
-            favoriteMuseums.push(cursor.value);
-          }
-          cursor.continue();
-        } else{
-          displayFavorites(favoriteMuseums,favoriteIds);
-        }
-      };
+      // objectStore.openCursor().onsuccess = function(event){
+      //   let cursor= event.target.result;
+      //   if(cursor){
+      //     if(favoriteIds.includes(cursor.value.id.toString())){
+      //       favoriteMuseums.push(cursor.value);
+      //     }
+      //     cursor.continue();
+      //   } else{
+      //     displayFavorites(favoriteMuseums,favoriteIds);
+      //   }
+      // };
     });
 }
 
@@ -360,6 +362,14 @@ function displayFavorites(museums, favoriteIds){
 }
 
 function addFavorites(museumId){
+let museumIdStr=museumId.toString();
+  getFavorites().then(favorites =>{
+    if(!favorites.includes(museumIdStr)){
+      favorites.push(museumIdStr);
+      localStorage.setItem("favorites",JSON.stringify(favorites));
+    }
+  });
+
   // if(!db){
   //   console.error("IndexedDB is not initialized yet");
   //   return;
@@ -367,19 +377,19 @@ function addFavorites(museumId){
 
       // const transaction = db.transaction(["museumData"],"readwrite");
       // const objectStore= transaction.objectStore("museumData");
-      objectStore.get(id).onsuccess= function (event) {
-        const museum= event.target.result;
-        if(museum){
-          getFavorites().then(favorites =>{
-            if(!favorites.includes(museumId)){
-              favorites.push(id);
-              localStorage.setItem("favorites",JSON.stringify(favorites));
-            }
-          });
+      // objectStore.get(id).onsuccess= function (event) {
+      //   const museum= event.target.result;
+      //   if(museum){
+      //     getFavorites().then(favorites =>{
+      //       if(!favorites.includes(museumId)){
+      //         favorites.push(id);
+      //         localStorage.setItem("favorites",JSON.stringify(favorites));
+      //       }
+      //     });
 
           
-        }
-      };
+      //   }
+      // };
 }
 
 function removeFavorite(museumId){
@@ -392,7 +402,7 @@ function removeFavorite(museumId){
 function getFavorites(){
   return new Promise((resolve) => {
     let favorites= JSON.parse(localStorage.getItem("favorites")) || [];
-    resolve(favorites);
+    resolve(favorites.map(String));
   });
 }
 
