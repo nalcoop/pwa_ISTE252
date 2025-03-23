@@ -300,6 +300,7 @@ function addFavoritesEventListeners(){
         if(favorites.includes(museumId)){
           removeFavorite(museumId);
           card.remove();
+          this.textContent="Add to Favorites";
           console.log("removed");
         } else{
           addFavorites(museumId);
@@ -319,6 +320,7 @@ function loadFavorites(){
 
     getFavorites().then(favoriteIds =>{
       let favoriteMuseums = museum.museums.filter(museumItem => favoriteIds.includes(museumItem.id.toString()));
+      let container= document.getElementById("fav-museums-list");
       if(container){
         if(favoriteMuseums.length===0){
           container.innerHTML=`<p class="empty-message"> You have no favorites yet. Add some museums to your favorites!</p>`;
@@ -351,9 +353,8 @@ function displayFavorites(museums, favoriteIds){
 
   let template="";
   museums.forEach(museumItem =>{
-    let isFavorited= favoriteIds.includes(museumItem.id.toString());
     template+= `
-    <div class="fav-card" data-id="${museumItem.id}">
+    <div class="card" data-id="${museumItem.id}">
         <h1 class="name"> ${museumItem.Name}</h1>
         <h3 class="property-name"> Address: ${museumItem.Address} </h3>
         <h3 class="property-name"> Website: <a href="${museumItem.Website}" target="_blank">${museumItem.Website}</a></h3>
@@ -406,7 +407,18 @@ function removeFavorite(museumId){
   getFavorites().then(favorites => {
     let updatedFavorites= favorites.filter(id => id !== museumId);
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+
+    if(window.location.pathname.includes("favorites.html")){
+      let card=document.querySelector(`.card[data-id="${museumIdStr}"`);
+      if(card){
+        card.remove();
+    }
+  }
   });
+  //updating the UI
+
+
+  
 }
 
 function getFavorites(){
