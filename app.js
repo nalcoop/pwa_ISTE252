@@ -264,7 +264,7 @@ document.addEventListener("DOMContentLoaded", function(){
     filterPages.forEach(museumItem =>{
       let isFavorited= favorites.includes(museumItem.id.toString());
       template+= `
-      <div class="card" data-id="${museumItem.id}">
+      <div class="fav-card"data-id=${museumItem.id}">
           <h1 class="name"> ${museumItem.Name}</h1>
           <h3 class="property-name"> Address: ${museumItem.Address} </h3>
           <h3 class="property-name"> Website: <a href="${museumItem.Website}" target="_blank">${museumItem.Website}</a></h3>
@@ -272,7 +272,7 @@ document.addEventListener("DOMContentLoaded", function(){
           <button class="favorite-button"> ${isFavorited ? "Remove from Favorites" : "Add to Favorites"}</button>
       </div>`; 
     });
-    let container= document.getElementById("museum-list") || document.querySelector(".card");
+    let container= document.getElementById( "fav-museum-list").querySelector(".card");
     if(container){
      container.innerHTML= template;
     addFavoritesEventListeners();
@@ -290,7 +290,7 @@ document.addEventListener("DOMContentLoaded", function(){
 function addFavoritesEventListeners(){
   document.querySelectorAll(".favorite-button").forEach(button =>{
     button.addEventListener("click", function(){
-      let card = this.closest(".fav-card");
+      let card = this.closest(".card");
       let museumId= card.getAttribute("data-id");
 
       getFavorites().then(favorites =>{
