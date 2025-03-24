@@ -121,7 +121,7 @@ const museum= {
         {
             "id":2,
             "Name": "American Visionary Art Museum",
-            "Images":"",
+            "Images":["./assets/images/avam-art-1.jpg","./assets/images/avam-art-2.jpg","./assets/images/avam-art-3.jpg","./assets/images/avam-art-45.jpg"],
             "Address": "800 Key Highway, Baltimore, MD 21230",
             "Website": "https://www.avam.org/",
             "Brief Description": 
@@ -131,7 +131,7 @@ const museum= {
         {
             "id":3,
             "Name": "Baltimore Museum of Art",
-            "Images":"",
+            "Images":["./assets/images/bma-art-1.jpg","./assets/images/bma-art-2.jpg","./assets/images/bma-art-3.jpg","./assets/images/bma-art-4.jpg"],
             "Address": "10 Art Museum Drive, Baltimore, MD 21218",
             "Website": "https://artbma.org/ ",
             "Brief Description": 
@@ -151,7 +151,7 @@ const museum= {
         {
             "id":5,
             "Name":"Reginald F. Lewis Museum of Maryland African American History & Culture", 
-            "Images":"",
+            "Images":["./assets/images/rfl-art-1.jpg","./assets/images/rfl-art-2.jpg","./assets/images/rfl-art-3.jpg","./assets/images/rfl-art-4.jpg"],
             "Address":"830 E Pratt St, Baltimore, MD 21202",
             "Website":" https://www.lewismuseum.org/",
             "Brief Description":"The Reginald F. Lewis Museum of Maryland African American History & Culture is focused on sharing the story of African American Marylanders through the arts. Located in downtown Baltimore, Reginald F. Lewis shares the preserved history of African American Marylanders through art, documents, and oral history presentations. The Reginald F. Lewis is based on the expansion of Black/African American arts and history with its name coming from one of the few Black millionaires. Established in 2005, the Reginald F. Lewis Museum has continued sharing the history of Black Marylanders for all those who attend.",
