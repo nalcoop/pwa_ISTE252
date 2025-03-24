@@ -55,7 +55,7 @@ overflow: hidden;
 #navbar {
     background-color: var(--nav-color);
     height: 100px;
-    position: fixed;
+    position:absolute;
     width: 100vw;
     z-index: 99999999999;
   }

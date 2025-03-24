@@ -102,14 +102,14 @@ for (let i = 0; i < len; i++) {
 // gather content ideas 
 // FIX THISSSSS
 
-// create the template 
+// create the template pwa_ISTE252\assets\images\walters-art-1.jpg
 const museum= {
   "museums": [
         {
           // add in an image tag to store the images for each slide show
             "id":1,
             "Name": "Walters Art Museum",
-            "Images":"",
+            "Images":["pwa_ISTE252\assets\images\walters-art-1.jpg","pwa_ISTE252\assets\images\walters-art-2.jpg","pwa_ISTE252\assets\images\walters-art-3.jpg","pwa_ISTE252\assets\images\walters-art-4.jpg"],
             "Address": "600 N Charles St, Baltimore, MD 21201",
             "Website": "https://thewalters.org/",
             "Brief Description": 
@@ -300,17 +300,17 @@ document.addEventListener("DOMContentLoaded", function(){
       let template="";
       filterPages.forEach( ( museumItem)=>{
         let isFavorited= favorites.includes(museumItem.id.toString()); 
-        let images= museumItem.images || [];
+        let images= museumItem.images || ["pwa_ISTE252\assets\images\walters-art-1.jpg","pwa_ISTE252\assets\images\walters-art-2.jpg","pwa_ISTE252\assets\images\walters-art-3.jpg","pwa_ISTE252\assets\images\walters-art-4.jpg"];
         template+= `
         <div class="card" data-id="${museumItem.id}">
+                   <div class="slideshow" id="slideshow-${museumItem.id}">
+            ${images.map((imgSrc,index) =>`<img src= "${imgSrc}" class="slide  ${index === 0 ? 'active' :''}"/>`).join("")}
+        </div>
             <h1 class="name"> ${museumItem.Name}</h1>
             <h3 class="property-name"> Address: ${museumItem.Address} </h3>
             <h3 class="property-name"> Website: <a href="${museumItem.Website}" target="_blank">${museumItem.Website}</a></h3>
             <p class="about"> ${museumItem["Brief Description"]} </p>
-           
-            <div class="slideshow" id="slideshow-${museumsItem.id}">
-            ${images.map((imgSrc,index) =>`<img src= "${imgSrc}" class="slide" ${index === 0 ? 'active' :''}"/>`).join("")}
-        </div>
+        
         <button class="favorite-button" data-id="${museumItem.id}"> ${isFavorited ? "Remove from Favorites" : "Add to Favorites"}</button>
         </div>`; 
       });
@@ -326,14 +326,20 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
       function startAllSlideshows(){
+       
         document.querySelectorAll(".slideshow").forEach((slideshow)=>{
           let slides= slideshow.querySelectorAll(".slide");
+          if(slides.length===0)return;
           let currentIndex=0;
+          slides[currentIndex].classList.add("active");
+          
           setInterval(()=>{
-            slides[currentIndex].classList.remove("active");
-            currentIndex=(currentIndex +1) % slides.length;
-            slides[currentIndex].classList.add("active");
-          },500);
+            if(slides.length>0){
+              slides[currentIndex].classList.remove("active");
+              currentIndex=(currentIndex +1) % slides.length;
+              slides[currentIndex].classList.add("active");
+            }
+          },1000);
         });
       }
  
@@ -361,28 +367,28 @@ function addFavoritesEventListeners(){
 // Carousel Function 
 // Must update to change automatically yet allow the user to change the image by swiping or clicking
 
-let heroIndex=0;
-changeSlide();
+// let heroIndex=0;
+// changeSlide();
 
-function changeSlide() {
-  let i;
-  const carousel = document.getElementsByClassName("hero-images");
-  let dots= document.getElementsByClassName("indicator");
-  for(i=0; i<carousel.length; i++){
-    carousel[i].style.display="none";
-  }
-  heroIndex++;
+// function changeSlide() {
+//   let i;
+//   const carousel = document.getElementsByClassName("hero-images");
+//   let dots= document.getElementsByClassName("indicator");
+//   for(i=0; i<carousel.length; i++){
+//     carousel[i].style.display="none";
+//   }
+//   heroIndex++;
 
-  if(heroIndex > carousel.length){
-   heroIndex=1;
-  }
-  for (i=0; i<dots.length; i++){
-    dots[i].className= dots[i].className.replace("active","");
-  }
- carousel[heroIndex-1].style.display="block";
- dots[heroIndex-1].className+="active";
- setTimeout(changeSlide,1000); //  changes it every second
+//   if(heroIndex > carousel.length){
+//    heroIndex=1;
+//   }
+//   for (i=0; i<dots.length; i++){
+//     dots[i].className= dots[i].className.replace("active","");
+//   }
+//  carousel[heroIndex-1].style.display="block";
+//  dots[heroIndex-1].className+="active";
+//  setTimeout(changeSlide,1000); //  changes it every second
 
-}
+// }
  
 
