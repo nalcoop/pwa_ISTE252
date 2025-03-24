@@ -7,7 +7,7 @@ img {vertical-align: middle;}
 .slideshow {
 position:relative;
 width:100%;
-height:auto;
+height:75%;
 overflow: hidden;
 }
 
