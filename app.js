@@ -305,6 +305,9 @@ document.addEventListener("DOMContentLoaded", function(){
         <div class="card" data-id="${museumItem.id}">
                    <div class="slideshow" id="slideshow-${museumItem.id}">
             ${images.map((imgSrc,index) =>`<img src= "${imgSrc}" class="slide  ${index === 0 ? 'active' :''}"/>`).join("")}
+            <button class="prev" data-id="${museumItem.id}">&#10094;</button>
+            <button class="next" data-id="${museumItem.id}">&#10095;</button>
+
         </div>
             <h1 class="name"> ${museumItem.Name}</h1>
             <h3 class="property-name"> Address: ${museumItem.Address} </h3>
@@ -325,21 +328,37 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
 
-      function startAllSlideshows(){
+    function startAllSlideshows(){
        
         document.querySelectorAll(".slideshow").forEach((slideshow)=>{
           let slides= slideshow.querySelectorAll(".slide");
+          let prevButton= slides.querySelector(".prev");
+          let nextButton= slides.querySelector(".next");
           if(slides.length===0)return;
           let currentIndex=0;
           slides[currentIndex].classList.add("active");
-          
-          setInterval(()=>{
-            if(slides.length>0){
-              slides[currentIndex].classList.remove("active");
-              currentIndex=(currentIndex +1) % slides.length;
-              slides[currentIndex].classList.add("active");
-            }
-          },1000);
+
+          let interval=setInterval(nextSlide,3000);
+          function showSlide(index){
+            slides.forEach(slide=> slide.classList.remove("active"));
+            slides[index].classList.add("active");
+          }
+          function nextSlide(){
+            currentIndex=(currentIndex+1) %slides.length;
+            showSlide(currentIndex);
+          }
+          function prevSlide(){
+            currentIndex=(currentIndex-1 + slides.length) % slides.length;
+            showSlide(currentIndex);
+          }
+          function resetInterval(){
+            clearInterval(interval);
+            interval=setInterval(nextSlide,3000);
+          }
+          prevButton.addEventListener("click",()=>{
+            nextSlide();
+            resetInterval();
+          });
         });
       }
  
