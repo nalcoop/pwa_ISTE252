@@ -109,7 +109,7 @@ const museum= {
           // add in an image tag to store the images for each slide show
             "id":1,
             "Name": "Walters Art Museum",
-            "Images":["pwa_ISTE252\assets\images\walters-art-1.jpg","pwa_ISTE252\assets\images\walters-art-2.jpg","pwa_ISTE252\assets\images\walters-art-3.jpg","pwa_ISTE252\assets\images\walters-art-4.jpg"],
+            "Images":["./assets/images/walters-art-1.jpg","./assets/images/walters-art-2.jpg","./assets/images/walters-art-3.jpg","./assets/images/walters-art-4.jpg"],
             "Address": "600 N Charles St, Baltimore, MD 21201",
             "Website": "https://thewalters.org/",
             "Brief Description": 
@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", function(){
       let template="";
       filterPages.forEach( ( museumItem)=>{
         let isFavorited= favorites.includes(museumItem.id.toString()); 
-        let images= museumItem.images || ["pwa_ISTE252\assets\images\walters-art-1.jpg","pwa_ISTE252\assets\images\walters-art-2.jpg","pwa_ISTE252\assets\images\walters-art-3.jpg","pwa_ISTE252\assets\images\walters-art-4.jpg"];
+        let images= museumItem.Images || [];
         template+= `
         <div class="card" data-id="${museumItem.id}">
                    <div class="slideshow" id="slideshow-${museumItem.id}">
