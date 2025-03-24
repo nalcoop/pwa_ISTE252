@@ -230,12 +230,7 @@ if (!museum.museums || museum.museums.length==0){
 }
 
 document.addEventListener("DOMContentLoaded", function(){
-  let currentPage= window.location.pathname.split("/").pop();
-  if(currentPage === "favorites.html"){
-    loadFavorites();
-  } else{
-    loadMuseums();
-  }
+
 
   let filterPages;
   let db;
@@ -250,6 +245,7 @@ document.addEventListener("DOMContentLoaded", function(){
     db = event.target.result;
     console.log("Database opened successfully");
   };
+
 
   
   let favorites=JSON.parse(localStorage.getItem("favorites")) || [];
@@ -275,6 +271,12 @@ document.addEventListener("DOMContentLoaded", function(){
     createMuseums();
   }
 
+  let currentPage= window.location.pathname.split("/").pop();
+  if(currentPage === "favorites.html"){
+    loadFavorites();
+  } else{
+    loadMuseums();
+  }
 
   function updateFavorites(museumId){
       let index= favorites.indexOf(museumId);
@@ -306,6 +308,7 @@ document.addEventListener("DOMContentLoaded", function(){
       }
       filterPages= museum.museums.filter(museum => favoriteIds.includes(museum.id.toString()));
       createMuseums();
+      console.log("creating favorite");
     }
 
 
