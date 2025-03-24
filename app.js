@@ -307,7 +307,6 @@ document.addEventListener("DOMContentLoaded", function(){
             ${images.map((imgSrc,index) =>`<img src= "${imgSrc}" class="slide  ${index === 0 ? 'active' :''}"/>`).join("")}
             <button class="prev" data-id="${museumItem.id}">&#10094;</button>
             <button class="next" data-id="${museumItem.id}">&#10095;</button>
-
         </div>
             <h1 class="name"> ${museumItem.Name}</h1>
             <h3 class="property-name"> Address: ${museumItem.Address} </h3>
@@ -332,38 +331,48 @@ document.addEventListener("DOMContentLoaded", function(){
        
         document.querySelectorAll(".slideshow").forEach((slideshow)=>{
           let slides= slideshow.querySelectorAll(".slide");
-          let prevButton= slides.querySelector("prev");
-          let nextButton= slides.querySelector("next");
-          
+          let prevButton= slideshow.querySelector(".prev");
+          let nextButton= slideshow.querySelector(".next");
           if(slides.length===0)return;
+         
           let currentIndex=0;
           slides[currentIndex].classList.add("active");
 
-          let interval=setInterval(nextSlide,3000);
+          
+         
           function showSlide(index){
             slides.forEach(slide=> slide.classList.remove("active"));
             slides[index].classList.add("active");
           }
           function nextSlide(){
-            currentIndex=(currentIndex+1) %slides.length;
+            currentIndex=(currentIndex+1) % slides.length;
             showSlide(currentIndex);
           }
           function prevSlide(){
             currentIndex=(currentIndex-1 + slides.length) % slides.length;
             showSlide(currentIndex);
           }
+
+          let interval=setInterval(nextSlide,2500);
+
           function resetInterval(){
             clearInterval(interval);
-            interval=setInterval(nextSlide,3000);
+            interval=setInterval(nextSlide,2500);
           }
-          prevButton.addEventListener("click",()=>{
-            prevSlide();
-            resetInterval();
-          });
-          nextButton.addEventListener("click",()=>{
-            nextSlide();
-            resetInterval();
-          });
+          if(prevButton){
+            prevButton.addEventListener("click",()=>{
+              prevSlide();
+              resetInterval();
+            });
+          }
+        
+          if(nextButton){
+            nextButton.addEventListener("click",()=>{
+              nextSlide();
+              resetInterval();
+            });
+          }
+        
         });
       }
  
