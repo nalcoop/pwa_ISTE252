@@ -231,6 +231,12 @@ if (!museum.museums || museum.museums.length==0){
 
 document.addEventListener("DOMContentLoaded", function(){
   let currentPage= window.location.pathname.split("/").pop();
+  if(currentPage === "favorites.html"){
+    loadFavorites();
+  } else{
+    loadMuseums();
+  }
+
   let filterPages;
   let db;
   const dbName= "MuseumDatabase";
@@ -281,12 +287,27 @@ document.addEventListener("DOMContentLoaded", function(){
       }
       localStorage.setItem("favorites", JSON.stringify(favorites));
 
-      document.querySelectorAll("favorite-button").forEach(button =>{
+      document.querySelectorAll(".favorite-button").forEach(button =>{
         if(button.dataset.id===museumId){
           button.textContent= favorites.includes(museumId) ? "Remove from Favorites" : "Add to favorites";
         }
       });
+
+      if(window.location.pathname.includes("favorites.html")){
+        loadFavorites();
+      }
     }
+
+    function loadFavorites(){
+      let favoriteIds= JSON.parse(localStorage.getItem("favorites")) || [];
+      if(!museum || !museum.museums){
+        console.error("Museum data not loaded");
+        return;
+      }
+      filterPages= museum.museums.filter(museum => favoriteIds.includes(museum.id.toString()));
+      createMuseums();
+    }
+
 
     function createMuseums(){
       let template="";
@@ -322,12 +343,12 @@ function addFavoritesEventListeners(){
   document.querySelectorAll(".favorite-button").forEach(button =>{
     button.addEventListener("click", function(){
       console.log("button clicked");
-      let museumId= this.dataset.id;
+      let museumId= this.getAttribute("data-id");
       updateFavorites(museumId);
     });
   });
 }
-  loadMuseums();
+
   }); 
 
 
