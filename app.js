@@ -141,7 +141,7 @@ const museum= {
         {
             "id":4,
             "Name": "The National Great Blacks In Wax Museum",
-            "Images":"",
+            "Images":["./assets/images/ngbw-art-1.jpg","./assets/images/ngbw-art-2.jpeg","./assets/images/ngbw-art-3.jpeg","./assets/images/ngbw-art-4.jpg"],
             "Address": "1601-03 East North Ave, Baltimore, MD 21213",
             "Website": "https://www.greatblacksinwax.org/",
             "Brief Description": 
@@ -161,7 +161,7 @@ const museum= {
         {
             "id":6,
             "Name":"Maryland Science Center", 
-            "Images":"",
+            "Images":["./assets/images/msc-educational-1.jpg","./assets/images/msc-educational-2.jpg","./assets/images/msc-educational-3.jpg","./assets/images/msc-educational-4.jpg"],
             "Address":"601 Light St, Baltimore, MD 21230",
             "Website":"https://www.mdsci.org/",
             "Brief Description":"The Maryland Science Center is focused on teaching the multidisciplinary fashions of science. Located in the Baltimore Inner Harbor, the Science Center aims to promote learning science in an interactive, fun for all ages way. The Science Center explores many of the disciplines of science such as paleontology, chemistry, environmental, astronomy and more. Established in 1797, the Science Center has been expanding and teaching the sciences to those who attend for ages.",
@@ -171,7 +171,7 @@ const museum= {
         {
             "id":7,
             "Name":"B&O Railroad Museum", 
-            "Images":"",
+            "Images":["./assets/images/railroad-educational-1.jpg","./assets/images/railroad-educational-2.jpg","./assets/images/railroad-educational-3.jpg","./assets/images/railroad-educational-4.jpg"],
             "Address":"901 W Pratt St, Baltimore, MD 21223",
             "Website":"https://www.borail.org/",
             "Brief Description":"The B&O Railroad Museum is focused on teaching the history of the American railroad system, in the birthplace of the nation’s first mile of commercial railroad. Conveniently located in Baltimore’s Mount Clare neighborhood, the B&O Railroad brings light to the history of the railroad system by showing artifacts of the evolution of railroading. The B&O goes above and beyond to ensure the enjoyment of the museum by including a public park located right across the street. Established almost 200 years ago, the B&O Railroad has continued to uphold its foundational values. ",
@@ -181,7 +181,7 @@ const museum= {
         {
             "id":8,
             "Name":":Baltimore Museum of Industry", 
-            "Images":"",
+            "Images":["./assets/images/bmi-educational-1.jpg","./assets/images/bmi-educational-2.jpg","./assets/images/bmi-educational-3.jpeg","./assets/images/bmi-educational-4.jpg"],
             "Address":"1415 Key Hwy, Baltimore, MD 21230",
             "Website":"https://www.thebmi.org/",
             "Brief Description":"The Baltimore Museum of Industry is focused on teaching individuals about the history of the labor and industry field. Located right on the Patapsco River in Baltimore, the BMI provides an immersive, interactive experience of the labor and industry field. The BMI teaches all those who visit the stories of significant Baltimore labor workers authentically, ensuring an all-around immersive experience with hands-on activities and more. Established in 1977, the BMI has continued to provide an authentic learning experience for all those who attend.",
@@ -191,7 +191,7 @@ const museum= {
         {
             "id":9,
             "Name":"Babe Ruth Birthplace Museum",
-            "Images":"",
+            "Images":["./assets/images/baberuth-memorabilia-1.jpg","./assets/images/baberuth-memorabilia-2.png","./assets/images/baberuth-memorabilia-3.png","./assets/images/baberuth-memorabilia-4.jpg"],
             "Address":"216 Emory Street, Baltimore, MD 21230",
             "Website":"https://baberuthmuseum.org/",
             "Brief Description":"The Babe Ruth Birthplace Museum is home to the memorabilia of the late, great Babe Ruth. Located in downtown Baltimore, the Babe Ruth Birthplace is an educational institution that is dedicated to sharing the history and legacy of Babe Ruth. Established in 1974, the Babe Ruth Birthplace continues to preserve the legacy of Babe Ruth to all those who attend.",
@@ -201,7 +201,7 @@ const museum= {
         {
             "id":10,
             "Name":"Edgar Allan Poe House & Museum", 
-            "Images":"",
+            "Images":["./assets/images/poe-memorabilia-1.jpg","./assets/images/poe-memorabilia-2.jpg","./assets/images/poe-memorabilia-3.jpg","./assets/images/poe-memorabilia-4.jpg"],
             "Address":"203 N Amity St, Baltimore, MD 21223",
             "Website":"https://www.poeinbaltimore.org/",
             "Brief Description":"The Edgar Allan Poe House & Museum is the actual home of the late poet Edgar Allan Poe. Located in West Baltimore, the Poe Homes is a national historic landmark and literary landmark, that aims to tell the story of Edgar Allan Poe. Established in 1949, the Edgar Allan Poe House & Museum is upholding its legacy and expanding across the DMV area.",
