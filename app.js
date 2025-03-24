@@ -332,8 +332,8 @@ document.addEventListener("DOMContentLoaded", function(){
        
         document.querySelectorAll(".slideshow").forEach((slideshow)=>{
           let slides= slideshow.querySelectorAll(".slide");
-          let prevButton= slides.querySelector(".prev");
-          let nextButton= slides.querySelector(".next");
+          let prevButton= slides.querySelector("prev");
+          let nextButton= slides.querySelector("next");
           if(slides.length===0)return;
           let currentIndex=0;
           slides[currentIndex].classList.add("active");
@@ -356,6 +356,10 @@ document.addEventListener("DOMContentLoaded", function(){
             interval=setInterval(nextSlide,3000);
           }
           prevButton.addEventListener("click",()=>{
+            prevSlide();
+            resetInterval();
+          });
+          nextButton.addEventListener("click",()=>{
             nextSlide();
             resetInterval();
           });
