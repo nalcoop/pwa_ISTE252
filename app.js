@@ -334,6 +334,7 @@ document.addEventListener("DOMContentLoaded", function(){
           let slides= slideshow.querySelectorAll(".slide");
           let prevButton= slides.querySelector("prev");
           let nextButton= slides.querySelector("next");
+          
           if(slides.length===0)return;
           let currentIndex=0;
           slides[currentIndex].classList.add("active");
