@@ -209,6 +209,29 @@ const museum= {
         }
     ]
 };
+const sections={
+  "speciality":[
+    {
+      "id":1,
+      "name": "Art Museums",
+      "images":[],
+      "description":"Immerse yourself in art of all forms,backgrounds and, cultures. Check out Baltimore's best art museums."
+    },
+    {
+      "id":2,
+      "name": "Educational Museums",
+      "images":[],
+      "description":"Immerse yourself in interactive, hands-on learning. Check out Baltimore's best educational museums."
+    },
+    {
+      "id":3,
+      "name": "Memorabilia Museums",
+      "images":[],
+      "description":"Learn about some of Baltimore's most famous historic figures. Check out Baltimore's best memorabilia museums."
+    }
+
+  ]
+};
 if (!museum.museums || museum.museums.length==0){
     console.error("No museums found");
 }
@@ -217,6 +240,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
   let filterPages;
+  
   let db;
   const dbName= "MuseumDatabase";
   const request= indexedDB.open(dbName,1);
@@ -293,6 +317,35 @@ document.addEventListener("DOMContentLoaded", function(){
       filterPages= museum.museums.filter(museum => favoriteIds.includes(museum.id.toString()));
       createMuseums();
       console.log("creating favorite");
+    }
+
+    
+
+    function createSection(){
+      let template="";
+      let filterSections=sections.speciality;
+      filterSections.forEach(sectionItem =>{
+        let images= sectionItem.images || [];
+        template+=`
+        <div class="specialityCard">
+        <div class="slideshow" id="slideshow-${sectionItem.id}">
+            ${images.map((imgSrc,index) =>`<img src= "${imgSrc}" class="slide  ${index === 0 ? 'active' :''}"/>`).join("")}
+            <button class="prev" data-id="${sectionItem.id}">&#10094;</button>
+            <button class="next" data-id="${sectionItem.id}">&#10095;</button>
+            </div>
+         <h1 class="name"> ${sectionItem.name}</h1>
+         <h3 class="property-name">${sectionItem.description} </h3>
+         <button class="details" data-id="${sectionItem.id}">Learn More</button>
+         </div>`; 
+      });
+      let container= document.getElementById("speciality-list");
+      if(container){
+       container.innerHTML= template;
+       addDetailsEventListener();
+       startAllSlideshows();
+      } else{
+       console.error("Container not being made");
+      }
     }
 
 // updating to include the images
@@ -375,53 +428,4 @@ document.addEventListener("DOMContentLoaded", function(){
         
         });
       }
- 
-
-  
-  
-
-//function to create user template
-
-function addFavoritesEventListeners(){
-  document.querySelectorAll(".favorite-button").forEach(button =>{
-    button.addEventListener("click", function(){
-      console.log("button clicked");
-      let museumId= this.getAttribute("data-id");
-      updateFavorites(museumId);
-    });
-  });
-}
-
-  }); 
-
-
-
-
-// Carousel Function 
-// Must update to change automatically yet allow the user to change the image by swiping or clicking
-
-// let heroIndex=0;
-// changeSlide();
-
-// function changeSlide() {
-//   let i;
-//   const carousel = document.getElementsByClassName("hero-images");
-//   let dots= document.getElementsByClassName("indicator");
-//   for(i=0; i<carousel.length; i++){
-//     carousel[i].style.display="none";
-//   }
-//   heroIndex++;
-
-//   if(heroIndex > carousel.length){
-//    heroIndex=1;
-//   }
-//   for (i=0; i<dots.length; i++){
-//     dots[i].className= dots[i].className.replace("active","");
-//   }
-//  carousel[heroIndex-1].style.display="block";
-//  dots[heroIndex-1].className+="active";
-//  setTimeout(changeSlide,1000); //  changes it every second
-
-// }
- 
-
+});
