@@ -399,7 +399,7 @@ document.addEventListener("DOMContentLoaded", function(){
          
           function showSlide(index){
             slides.forEach(slide=> slide.classList.remove("active"));
-            slides[index].classList.add("active");
+            slides[index].classList.add("active","fade");
           }
           function nextSlide(){
             currentIndex=(currentIndex+1) % slides.length;
@@ -416,19 +416,17 @@ document.addEventListener("DOMContentLoaded", function(){
             clearInterval(interval);
             interval=setInterval(nextSlide,2500);
           }
-          if(prevButton){
+          if(prevButton && nextButton){
             prevButton.addEventListener("click",()=>{
               prevSlide();
               resetInterval();
             });
-          }
-        
-          if(nextButton){
             nextButton.addEventListener("click",()=>{
               nextSlide();
               resetInterval();
             });
           }
+        
         
         });
       }
