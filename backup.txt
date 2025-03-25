@@ -539,3 +539,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   })
 });
+
+    if (prevButton && !prevButton.dataset.listener) {
+      prevButton.dataset.listener = "true";
+   
+    }
+
+    if (nextButton && !nextButton.dataset.listener) {
+      nextButton.dataset.listener = "true";
+      nextButton.addEventListener("click", nextSlide);
+    }

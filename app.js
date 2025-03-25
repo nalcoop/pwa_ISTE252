@@ -265,21 +265,34 @@ const sections = {
     {
       id: 1,
       name: "Art Museums",
-      images: [],
+      images: [
+        "./assets/images/walters-art-1.jpg",
+        "./assets/images/avam-art-1.jpg",
+        "./asstes/images/bma-art-1.jpg",
+        "./assets/images/ngbw-art-1.jpg",
+        "./assets/images/rfl-art-1.jpg",
+      ],
       description:
         "Immerse yourself in art of all forms,backgrounds and, cultures. Check out Baltimore's best art museums.",
     },
     {
       id: 2,
       name: "Educational Museums",
-      images: [],
+      images: [
+        "./assets/images/msc-educational-1.jpg",
+        "./assets/images/railroad-educational-1.jpg",
+        "./assets/images/bmi-educational-1.jpg",
+      ],
       description:
         "Immerse yourself in interactive, hands-on learning. Check out Baltimore's best educational museums.",
     },
     {
       id: 3,
       name: "Memorabilia Museums",
-      images: [],
+      images: [
+        "./assets/images/baberuth-memorabilia-1.jpg",
+        "./assets/images/poe-memorabilia-1.JPG",
+      ],
       description:
         "Learn about some of Baltimore's most famous historic figures. Check out Baltimore's best memorabilia museums.",
     },
@@ -287,7 +300,6 @@ const sections = {
 };
 if (!museum.museums || !museum.museums) {
   console.error("No museums found");
-  return;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -296,6 +308,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let db;
   const dbName = "MuseumDatabase";
   const request = indexedDB.open(dbName, 1);
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
   request.onerror = function (event) {
     console.error("Database error: " + event.target.error);
@@ -305,8 +318,6 @@ document.addEventListener("DOMContentLoaded", function () {
     db = event.target.result;
     console.log("Database opened successfully");
   };
-
-  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
   function loadMuseums() {
     //based on page
@@ -331,12 +342,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     createMuseums();
   }
-  
+
   function loadFavorites() {
     let favoriteIds = JSON.parse(localStorage.getItem("favorites")) || [];
     if (!museum || !museum.museums) {
       console.error("Museum data not loaded");
-      return;
     }
     filterPages = museum.museums.filter((museum) =>
       favoriteIds.includes(museum.id.toString())
@@ -378,7 +388,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-
   function createSection() {
     let template = "";
     let filterSections = sections.speciality;
@@ -386,6 +395,9 @@ document.addEventListener("DOMContentLoaded", function () {
       let images = sectionItem.images || [];
       template += `
         <div class="specialityCard">
+        <div class="slideshow" id="slideshow-${sectionItem.id}">
+            ${images.map((imgSrc, index) => `<img src= "${imgSrc}" class="slide  ${index === 0 ? 'active' : ''}"/>`).join("")}
+        </div>
          <h1 class="name"> ${sectionItem.name}</h1>
          <h3 class="property-name">${sectionItem.description} </h3>
          <button class="details" data-id="${sectionItem.id}">Learn More</button>
@@ -439,10 +451,11 @@ document.addEventListener("DOMContentLoaded", function () {
       container.innerHTML = template;
       addFavoritesEventListeners();
       buttonControlledSlideshow();
-      console.log("slide show working");
+      console.log("functions added");
     } else {
       console.error("Container not being made");
     }
+    document.dispatchEvent(new Event("museumContentUpdated"));
   }
   //function to create user template
 
@@ -472,7 +485,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function animatedSlideshow(slideshow) {
-    if(!slideshow || slides.length===0){
+    if (!slideshow) {
       console.log("slideshow not being made", slideshow);
       return;
     }
@@ -480,70 +493,83 @@ document.addEventListener("DOMContentLoaded", function () {
     if (slides.length === 0) return;
     let currentIndex = 0;
     slides[currentIndex].classList.add("active", "fade");
-    
+
     function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove("active", "fade"));
-        slides[index].classList.add("active", "fade");
+      slides.forEach((slide) => slide.classList.remove("active", "fade"));
+      slides[index].classList.add("active", "fade");
     }
-    
+
     function nextSlide() {
-        currentIndex = (currentIndex + 1) % slides.length;
-        showSlide(currentIndex);
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
     }
-    
+
+    if (slideshow.dataset.interval) {
+      clearInterval(slideshow.dataset.interval);
+    }
+
     let interval = setInterval(nextSlide, 2500);
-    slideshow.dataset.interval=interval;
+    slideshow.dataset.interval = interval;
   }
-  
-  
+
   function buttonControlledSlideshow(slideshow) {
+    if (!slideshow) {
+      console.log("slideshow not being made", slideshow);
+      return;
+    }
     let slides = slideshow.querySelectorAll(".slide");
+    if (slides.length === 0) {
+      console.log("no slides");
+      return;
+    }
+
     let prevButton = slideshow.querySelector(".prev");
     let nextButton = slideshow.querySelector(".next");
-    
-    if (slides.length === 0) return;
     let currentIndex = 0;
     slides[currentIndex].classList.add("active", "fade");
-    
+
     if (slides.length <= 1) {
-        if (prevButton) prevButton.style.display = "none";
-        if (nextButton) nextButton.style.display = "none";
-        return;
+      if (prevButton) prevButton.style.display = "none";
+      if (nextButton) nextButton.style.display = "none";
+      return;
     }
-    
+
     function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove("active", "fade"));
-        slides[index].classList.add("active", "fade");
+      slides.forEach((slide) => slide.classList.remove("active", "fade"));
+      slides[index].classList.add("active", "fade");
     }
-    
+
     function nextSlide() {
-        currentIndex = (currentIndex + 1) % slides.length;
-        showSlide(currentIndex);
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
     }
-    
+
     function prevSlide() {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        showSlide(currentIndex);
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      showSlide(currentIndex);
     }
-    
-    if (prevButton && !prevButton.dataset.listener) {
-        prevButton.dataset.listener = "true";
-        prevButton.addEventListener("click", prevSlide);
+
+    if (prevButton) {
+      prevButton.removeEventListener("click", prevSlide);
+      prevButton.addEventListener("click", prevSlide);
     }
-    
-    if (nextButton && !nextButton.dataset.listener) {
-        nextButton.dataset.listener = "true";
-        nextButton.addEventListener("click", nextSlide);
+
+    if (nextButton) {
+      nextButton.removeEventListener("click", nextSlide);
+      nextButton.addEventListener("click", nextSlide);
     }
   }
-  
-  // Apply both functions to different slideshows
-  
-  document.querySelectorAll(".slideshow").forEach(slideshow => {
-    animatedSlideshow(slideshow);
-    buttonControlledSlideshow(slideshow);
-  });
-  
-  
-});
 
+  // Apply both functions to different slideshows
+  function initSlideshows() {
+    document.querySelectorAll(".slideshow").forEach((slideshow) => {
+      animatedSlideshow(slideshow);
+      buttonControlledSlideshow(slideshow);
+    });
+  }
+
+  initSlideshows();
+
+  document.addEventListener("DOMContentLoaded", initSlideshows);
+  document.addEventListener("museumContentUpdated", initSlideshows);
+});
