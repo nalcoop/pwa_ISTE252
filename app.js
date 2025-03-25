@@ -563,8 +563,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // Apply both functions to different slideshows
   function initSlideshows() {
     document.querySelectorAll(".slideshow").forEach((slideshow) => {
-      animatedSlideshow(slideshow);
-      buttonControlledSlideshow(slideshow);
+      if(currentPage=="index.html"){
+        animatedSlideshow(slideshow);
+      } else{
+        buttonControlledSlideshow(slideshow);
+      }
     });
   }
 
