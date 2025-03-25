@@ -1,52 +1,87 @@
-/* animation styles for the hero image */
-* {box-sizing: border-box;}
- /* change the font */
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
 
-img {vertical-align: middle;}
-
+/* Slideshow Container */
 .slideshow {
-  position:relative; 
-  border:none;
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  overflow: hidden;
+}
+
+/* Slides */
+.slide {
+  display: none;
+  width: 100%;
+  height: auto;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Fade effect */
+.fade {
+  animation: fadeEffect 1.5s;
+}
+
+@keyframes fadeEffect {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+
+/* Navigation Buttons */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
   cursor: pointer;
-  }
+  font-size: 18px;
+}
 
-  .slide{
-    opacity:0;
-    transition: fadeEfect 0.8s ease-in-out;
-    position:absolute;
-    width:100%;
-  }
-  
-  .slide.active {
-      background-color: #717171;
-  }
-  .fade {
-   animation: fade 0.5s ease-in;
-  }
-  
-  @keyframes fadeEffect {
-    from {opacity: .5} 
-    to {opacity: 1}
-  }
- 
+.prev {
+  left: 10px;
+}
 
-  .prev{
-    position:absolute;
-    top:50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.6);
-    color:white;
-    padding:12px;
-    border:none;
-    cursor:pointer;
-    font-size:18px;
-    transition: 0.3s ease-in-out;
-    z-index:20;
-    border-radius: 50%;
-  }
-  .prev:hover, .next:hover{
-    background-color: rgba(0, 0, 0, 0.9);
-  }
+.next {
+  right: 10px;
+}
+
+/* Museum Cards */
+.card {
+  background: white;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Favorite Button */
+.favorite-button {
+  background-color: #ff4500;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.favorite-button:hover {
+  background-color: #ff6347;
+}
 
   /* On smaller screens, decrease text size */
   @media only screen and (max-width: 300px) {
