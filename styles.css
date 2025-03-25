@@ -111,7 +111,7 @@ body {
   justify-content: flex-start;
 }
 
-.card{
+.card, .specialityCard{
   display:flex;
   flex-direction: column;
   align-items: center;
@@ -121,6 +121,7 @@ body {
   transition: transform 0.2s ease-in-out;
   margin:30px;
 }
+
 
 img {
   max-width: 100%;
