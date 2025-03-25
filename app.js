@@ -330,11 +330,6 @@ document.addEventListener("DOMContentLoaded", function(){
         let images= sectionItem.images || [];
         template+=`
         <div class="specialityCard">
-        <div class="slideshow" id="slideshow-${sectionItem.id}">
-            ${images.map((imgSrc,index) =>`<img src= "${imgSrc}" class="slide  ${index === 0 ? 'active' :''}"/>`).join("")}
-            <button class="prev" data-id="${sectionItem.id}">&#10094;</button>
-            <button class="next" data-id="${sectionItem.id}">&#10095;</button>
-        </div>
          <h1 class="name"> ${sectionItem.name}</h1>
          <h3 class="property-name">${sectionItem.description} </h3>
          <button class="details" data-id="${sectionItem.id}">Learn More</button>
@@ -344,7 +339,6 @@ document.addEventListener("DOMContentLoaded", function(){
       if(container){
        container.innerHTML= template;
        addDetailsEventListener();
-       setTimeout(startAllSlideshows,100);
       } else{
        console.error("Container not being made");
       }
@@ -375,7 +369,7 @@ document.addEventListener("DOMContentLoaded", function(){
       if(container){
        container.innerHTML= template;
        addFavoritesEventListeners();
-       setTimeout(startAllSlideshows,100);
+       startAllSlideshows();
       } else{
        console.error("Container not being made");
       }
@@ -418,35 +412,35 @@ document.addEventListener("DOMContentLoaded", function(){
       
          
           }
-          function nextSlide(){
-            currentIndex=(currentIndex+1) % slides.length;
-            showSlide(currentIndex);
-          }
-          function prevSlide(){
-            currentIndex=(currentIndex-1 + slides.length) % slides.length;
-            showSlide(currentIndex);
-          }
+          // function nextSlide(){
+          //   currentIndex=(currentIndex+1) % slides.length;
+          //   showSlide(currentIndex);
+          // }
+          // function prevSlide(){
+          //   currentIndex=(currentIndex-1 + slides.length) % slides.length;
+          //   showSlide(currentIndex);
+          // }
 
-          let interval=setInterval(nextSlide,2500);
+          // let interval=setInterval(nextSlide,2500);
 
-          function resetInterval(){
-            clearInterval(interval);
-            interval=setInterval(nextSlide,2500);
-          }
+          // function resetInterval(){
+          //   clearInterval(interval);
+          //   interval=setInterval(nextSlide,2500);
+          // }
 
-          if(prevButton && !prevButton.dataset.listener){
-            prevButton.dataset.listener="true";
-            prevButton.addEventListener("click",()=>{
-              prevSlide();
-              resetInterval();
-            });
-          }
-          if(nextButton && !nextButton.dataset.listener){
-            nextButton.addEventListener("click",()=>{
-              nextSlide();
-              resetInterval();
-            });
-          }
+          // if(prevButton && !prevButton.dataset.listener){
+          //   prevButton.dataset.listener="true";
+          //   prevButton.addEventListener("click",()=>{
+          //     prevSlide();
+          //     resetInterval();
+          //   });
+          // }
+          // if(nextButton && !nextButton.dataset.listener){
+          //   nextButton.addEventListener("click",()=>{
+          //     nextSlide();
+          //     resetInterval();
+          //   });
+          // }
         
         });
       }
