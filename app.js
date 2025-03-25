@@ -27,9 +27,10 @@ if ("serviceWorker" in navigator) {
   
   request.onupgradeneeded = function (event) {
     db = event.target.result;
-    const objectStore = db.createObjectStore("museumData", {
-      keyPath: "id",
-    });
+    if(!db.objectStoreNames.contains("museumData")){
+      const objectStore = db.createObjectStore("museumData", {keyPath: "id",});
+      objectStore.currentIndex("name","Name",{unique:false});
+    }   
   };
   
   //set up broadcast channel
@@ -260,6 +261,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
  function loadMuseums(){ 
     //based on page
+    let currentPage= window.location.pathname.split("/").pop();
     if (currentPage === "artMuseums.html"){
       filterPages= museum.museums.filter
        (museum=> museum.type==="Art");
@@ -279,7 +281,7 @@ document.addEventListener("DOMContentLoaded", function(){
     createMuseums();
   }
 
-  let currentPage= window.location.pathname.split("/").pop();
+ 
   if(currentPage === "favorites.html"){
     loadFavorites();
   } else{
@@ -384,6 +386,13 @@ document.addEventListener("DOMContentLoaded", function(){
           let slides= slideshow.querySelectorAll(".slide");
           let prevButton= slideshow.querySelector(".prev");
           let nextButton= slideshow.querySelector(".next");
+
+          if(slides.length<=1){
+            if(prevButton) prevButton.style.display="none";
+            if(nextButton) nextButton.style.display="none";
+            return;
+          }
+
           if(slides.length===0)return;
          
           let currentIndex=0;
@@ -457,34 +466,5 @@ function addDetailsEventListener(){
   });
 }
 
-
-
-
-// Carousel Function 
-// Must update to change automatically yet allow the user to change the image by swiping or clicking
-
-// let heroIndex=0;
-// changeSlide();
-
-// function changeSlide() {
-//   let i;
-//   const carousel = document.getElementsByClassName("hero-images");
-//   let dots= document.getElementsByClassName("indicator");
-//   for(i=0; i<carousel.length; i++){
-//     carousel[i].style.display="none";
-//   }
-//   heroIndex++;
-
-//   if(heroIndex > carousel.length){
-//    heroIndex=1;
-//   }
-//   for (i=0; i<dots.length; i++){
-//     dots[i].className= dots[i].className.replace("active","");
-//   }
-//  carousel[heroIndex-1].style.display="block";
-//  dots[heroIndex-1].className+="active";
-//  setTimeout(changeSlide,1000); //  changes it every second
-
-// }
  
 
