@@ -338,7 +338,7 @@ document.addEventListener("DOMContentLoaded", function(){
             <button class="next" data-id="${sectionItem.id}">&#10095;</button>
             </div>
          <h1 class="name"> ${sectionItem.name}</h1>
-         <h3 class="property-name">${sectionItem.description} </h3>
+         <p class="property-name">${sectionItem.description} </p>
          <button class="details" data-id="${sectionItem.id}">Learn More</button>
          </div>`; 
       });
