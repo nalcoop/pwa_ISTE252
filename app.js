@@ -19,7 +19,7 @@ if ("serviceWorker" in navigator) {
   request.onerror = function (event) {
     console.error("Database error: " + event.target.error);
   };
-  S
+
   request.onsuccess = function (event) {
     db = event.target.result;
     console.log("Database opened successfully");
@@ -287,7 +287,9 @@ document.addEventListener("DOMContentLoaded", function(){
   } else{
     loadMuseums();
   }
-
+  if(currentPage==="index.html"){
+    createSection();
+  }
   function updateFavorites(museumId){
       let index= favorites.indexOf(museumId);
       if(index ===-1){
@@ -406,11 +408,13 @@ document.addEventListener("DOMContentLoaded", function(){
          
           function showSlide(index){
             slides.forEach((slide)=>{
+            
               slide.classList.remove("active","fade");
-              slides.style.opacity=0;
+              slide.style.opacity=0;
             });
             slides[index].classList.add("active","fade");
             slides.style.opacity=1;
+           
       
          
           }

@@ -12,7 +12,7 @@ img {vertical-align: middle;}
 
   .slide{
     opacity:0;
-    transition: opacity 0.8s ease-in-out;
+    transition: fadeEfect 0.8s ease-in-out;
     position:absolute;
     width:100%;
   }
@@ -24,11 +24,30 @@ img {vertical-align: middle;}
    animation: fade 0.5s ease-in;
   }
   
-  @keyframes fade {
+  @keyframes fadeEffect {
     from {opacity: .5} 
     to {opacity: 1}
   }
-  
+ 
+
+  .prev{
+    position:absolute;
+    top:50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color:white;
+    padding:12px;
+    border:none;
+    cursor:pointer;
+    font-size:18px;
+    transition: 0.3s ease-in-out;
+    z-index:20;
+    border-radius: 50%;
+  }
+  .prev:hover, .next:hover{
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+
   /* On smaller screens, decrease text size */
   @media only screen and (max-width: 300px) {
     .text {font-size: 11px}
