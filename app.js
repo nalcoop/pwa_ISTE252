@@ -155,21 +155,6 @@ const museum = {
     },
     {
       id: 4,
-      Name: "The National Great Blacks In Wax Museum",
-      Images: [
-        "./assets/images/ngbw-art-1.jpg",
-        "./assets/images/ngbw-art-2.jpeg",
-        "./assets/images/ngbw-art-3.jpeg",
-        "./assets/images/ngbw-art-4.jpg",
-      ],
-      Address: "1601-03 East North Ave, Baltimore, MD 21213",
-      Website: "https://www.greatblacksinwax.org/",
-      "Brief Description":
-        "The National Great Blacks In Wax Museum is focused on sharing the dark raw history of Black Americans. Located in Old East Baltimore Historical District, the Blacks In Wax promotes the teachings of proper Black history. From as far back as slavery, to the recent accomplishments in the Black community. Established in 1988, the Blacks in Wax have upheld their foundational values and continue to promote the uncompromising truth of Black history.",
-      type: "Education",
-    },
-    {
-      id: 5,
       Name: "Reginald F. Lewis Museum of Maryland African American History & Culture",
       Images: [
         "./assets/images/rfl-art-1.jpg",
@@ -183,6 +168,22 @@ const museum = {
         "The Reginald F. Lewis Museum of Maryland African American History & Culture is focused on sharing the story of African American Marylanders through the arts. Located in downtown Baltimore, Reginald F. Lewis shares the preserved history of African American Marylanders through art, documents, and oral history presentations. The Reginald F. Lewis is based on the expansion of Black/African American arts and history with its name coming from one of the few Black millionaires. Established in 2005, the Reginald F. Lewis Museum has continued sharing the history of Black Marylanders for all those who attend.",
       type: "Art",
     },
+    {
+      id: 5,
+      Name: "The National Great Blacks In Wax Museum",
+      Images: [
+        "./assets/images/ngbw-art-1.jpg",
+        "./assets/images/ngbw-art-2.jpeg",
+        "./assets/images/ngbw-art-3.jpeg",
+        "./assets/images/ngbw-art-4.jpg",
+      ],
+      Address: "1601-03 East North Ave, Baltimore, MD 21213",
+      Website: "https://www.greatblacksinwax.org/",
+      "Brief Description":
+        "The National Great Blacks In Wax Museum is focused on sharing the dark raw history of Black Americans. Located in Old East Baltimore Historical District, the Blacks In Wax promotes the teachings of proper Black history. From as far back as slavery, to the recent accomplishments in the Black community. Established in 1988, the Blacks in Wax have upheld their foundational values and continue to promote the uncompromising truth of Black history.",
+      type: "Education",
+    },
+
     {
       id: 6,
       Name: "Maryland Science Center",
@@ -215,7 +216,7 @@ const museum = {
     },
     {
       id: 8,
-      Name: ":Baltimore Museum of Industry",
+      Name: "Baltimore Museum of Industry",
       Images: [
         "./assets/images/bmi-educational-1.jpg",
         "./assets/images/bmi-educational-2.jpg",
@@ -334,6 +335,10 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     } else if (currentPage === "favorites.html") {
       let favoriteIds = JSON.parse(localStorage.getItem("favorites")) || [];
+      if(favoriteIds.length === 0){
+        `<h1> Add some favorites to display here. </h1>`;
+        console.log("no favorites");
+      }
       filterPages = museum.museums.filter((museum) =>
         favoriteIds.includes(museum.id.toString())
       );
@@ -575,4 +580,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.addEventListener("DOMContentLoaded", initSlideshows);
   document.addEventListener("museumContentUpdated", initSlideshows);
+
 });
