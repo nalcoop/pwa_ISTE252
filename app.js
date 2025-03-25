@@ -268,7 +268,7 @@ const sections = {
       images: [
         "./assets/images/walters-art-1.jpg",
         "./assets/images/avam-art-1.jpg",
-        "./asstes/images/bma-art-1.jpg",
+        "./assets/images/bma-art-1.jpg",
         "./assets/images/ngbw-art-1.jpg",
         "./assets/images/rfl-art-1.jpg",
       ],

@@ -236,7 +236,7 @@ footer {
   display: flex;
   flex-direction: row-reverse;
   padding: 100px;
-  width: 100vw;
+  max-width: 100vw;
 }
 
 footer nav {
@@ -321,7 +321,15 @@ footer nav ul ul {
     display: flex;
     flex-direction: row;
   }
-
+  #hamburger {
+    background: transparent;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 100px;
+    transform: translateY(-50%);
+    display: none;
+  }
 }
 
 @media screen and (max-width: 1560px) {
