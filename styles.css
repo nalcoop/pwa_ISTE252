@@ -58,7 +58,7 @@ a {
 }
 /* code for the navigation dropdown & hamburger menu */
 #navbar {
-  background-color: var(--nav-color);
+  background-color: #6A7B76;
   height: 100px;
   position: absolute;
   width: 100vw;
@@ -74,7 +74,7 @@ a {
   margin: auto;
   gap: 25px;
   height: 100px;
-  background-color: var(--nav-color);
+  background-color: #6A7B76;
 }
 
 #navbar li {
@@ -116,7 +116,7 @@ a {
   /* display: none; */
   position: absolute;
   width: 100vw;
-  background-color: var(--nav-color);
+  background-color: #6A7B76;
   flex-direction: row;
   gap: 25px;
   padding: 25px 0;
@@ -130,7 +130,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
+  background-color: #F9EAE1;
   padding: 20px;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
@@ -150,7 +150,7 @@ a {
 /* Slides */
 .slide {
   display: none;
-  width: 100%;
+  max-width: 100%;
   height: auto;
   transition: opacity 1s ease-in-out;
 }
@@ -182,7 +182,7 @@ a {
   top: 50%;
   transform: translateY(-50%);
   background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  color: #F9EAE1;
   border: none;
   padding: 10px;
   cursor: pointer;
@@ -200,7 +200,7 @@ a {
 /* Favorite & Learn More Button */
 .favorite-button {
   background-color: #ff4500;
-  color: white;
+  color:#F9EAE1;
   border: none;
   padding: 10px 15px;
   cursor: pointer;
@@ -218,7 +218,7 @@ a {
 
 .details {
   background-color: #ff4500;
-  color: white;
+  color:#F9EAE1;
   border: none;
   padding: 10px 15px;
   cursor: pointer;
@@ -228,8 +228,8 @@ a {
 
 /* footer styles  */
 footer {
-  background-color: #22223B;
-  color: white;
+  background-color:#0B0033;
+  color:#F9EAE1;
   display: flex;
   flex-direction: row-reverse;
   padding: 100px;
@@ -246,7 +246,7 @@ footer nav ul {
 
 footer nav ul li a {
   font-family: 'Raleway', sans-serif;
-  color: white;
+  color: #F9EAE1;
   font-size: 1.25rem;
 }
 
@@ -281,7 +281,7 @@ footer nav ul ul {
     padding-top: 100px;
     padding-left: 100px;
     right: 0;
-    background-color: var(--nav-color);
+    background-color:#6A7B76;
     transform: translateX(100%);
     transition: transform 0.6s ease;
   }
