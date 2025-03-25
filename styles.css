@@ -35,7 +35,7 @@ h2,
 h3,
 h4,
 .favorite-button,
-.details {
+.details,#navbar a {
   font-family: "Raleway", sans-serif;
   margin-bottom: 20px;
   text-align: center;
@@ -58,6 +58,13 @@ a {
 }
 /* code for the navigation dropdown & hamburger menu */
 /* fix navigation for mobile, ensure the hamburger menu shows up and that the drop down is working properly */
+.notransition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
 #navbar {
   background-color: #6A7B76;
   height: 100px;
@@ -88,11 +95,6 @@ a {
 
 #navbar li:last-child {
   margin-right: 50px;
-}
-
-#navbar a {
-  font-family: "Raleway", sans-serif;
-  font-size: 20px;
 }
 
 #navbar ul ul {
@@ -201,7 +203,7 @@ a {
 }
 
 /* Favorite & Learn More Button */
-.favorite-button {
+.favorite-button, .details {
   background-color: #ff4500;
   color:#F9EAE1;
   border: none;
@@ -211,22 +213,8 @@ a {
   font-size: 16px;
 }
 
-.favorite-button:hover {
+.favorite-button:hover, .details:hover {
   background-color: #ff6347;
-}
-
-.details:hover {
-  background-color: #ff6347;
-}
-
-.details {
-  background-color: #ff4500;
-  color:#F9EAE1;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 16px;
 }
 
 /* footer styles  */
@@ -278,13 +266,12 @@ footer nav ul ul {
   #navbar nav>ul {
     flex-direction: column;
     align-items: baseline;
-    position: absolute;
+    display:flex;
     height: 100vh;
     width: 400px;
     top: 100px;
     padding-top: 100px;
     padding-left: 100px;
-    right: 0;
     background-color:#6A7B76;
     transform: translateX(100%);
     transition: transform 0.6s ease;
@@ -332,15 +319,12 @@ footer nav ul ul {
   }
 }
 
-@media screen and (max-width: 1560px) {
+@media screen and (max-width: 1560px) and (max-width:800px){
   footer {
     flex-direction: column-reverse;
     gap: 50px;
     padding: 50px;
   }
-}
-
-@media screen and (max-width: 800px) {
   footer nav>ul {
     /*Top level list*/
     display: flex;
