@@ -57,6 +57,7 @@ a {
   text-decoration: none;
 }
 /* code for the navigation dropdown & hamburger menu */
+/* fix navigation for mobile, ensure the hamburger menu shows up and that the drop down is working properly */
 #navbar {
   background-color: #6A7B76;
   height: 100px;
@@ -139,6 +140,8 @@ a {
 }
 
 /* Slideshow Container */
+/* make sure that all images are fitting into the container height and width */
+/* fix images in figma if need be */
 .slideshow {
   position: relative;
   width: 100%;
@@ -150,9 +153,9 @@ a {
 /* Slides */
 .slide {
   display: none;
-  max-width: 100%;
-  height: auto;
-  transition: opacity 1s ease-in-out;
+  width: 100%;
+  height:fit-content;
+  transition: opacity 1.5s ease-in-out;
 }
 
 .slide.active {
@@ -233,6 +236,7 @@ footer {
   display: flex;
   flex-direction: row-reverse;
   padding: 100px;
+  width: 100vw;
 }
 
 footer nav {
