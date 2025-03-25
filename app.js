@@ -286,10 +286,6 @@ document.addEventListener("DOMContentLoaded", function(){
     loadMuseums();
   }
 
-  if(currentPage==='index.html'){
-    createSection();
-  }
-
   function updateFavorites(museumId){
       let index= favorites.indexOf(museumId);
       if(index ===-1){
@@ -323,8 +319,6 @@ document.addEventListener("DOMContentLoaded", function(){
       console.log("creating favorite");
     }
 
-    
-
     function createSection(){
       let template="";
       let filterSections=sections.speciality;
@@ -336,9 +330,9 @@ document.addEventListener("DOMContentLoaded", function(){
             ${images.map((imgSrc,index) =>`<img src= "${imgSrc}" class="slide  ${index === 0 ? 'active' :''}"/>`).join("")}
             <button class="prev" data-id="${sectionItem.id}">&#10094;</button>
             <button class="next" data-id="${sectionItem.id}">&#10095;</button>
-            </div>
+        </div>
          <h1 class="name"> ${sectionItem.name}</h1>
-         <p class="property-name">${sectionItem.description} </p>
+         <h3 class="property-name">${sectionItem.description} </h3>
          <button class="details" data-id="${sectionItem.id}">Learn More</button>
          </div>`; 
       });
@@ -346,7 +340,7 @@ document.addEventListener("DOMContentLoaded", function(){
       if(container){
        container.innerHTML= template;
        addDetailsEventListener();
-       startAllSlideshows();
+       setTimeout(startAllSlideshows,100);
       } else{
        console.error("Container not being made");
       }
@@ -377,7 +371,7 @@ document.addEventListener("DOMContentLoaded", function(){
       if(container){
        container.innerHTML= template;
        addFavoritesEventListeners();
-       startAllSlideshows();
+       setTimeout(startAllSlideshows,100);
       } else{
        console.error("Container not being made");
       }
@@ -393,12 +387,12 @@ document.addEventListener("DOMContentLoaded", function(){
           if(slides.length===0)return;
          
           let currentIndex=0;
-          slides[currentIndex].classList.add("active");
+          slides[currentIndex].classList.add("active","fade");
 
           
          
           function showSlide(index){
-            slides.forEach(slide=> slide.classList.remove("active"));
+            slides.forEach(slide=> slide.classList.remove("active","fade"));
             slides[index].classList.add("active","fade");
           }
           function nextSlide(){
@@ -427,7 +421,70 @@ document.addEventListener("DOMContentLoaded", function(){
             });
           }
         
-        
         });
       }
-});
+ 
+
+  
+  
+
+//function to create user template
+
+function addFavoritesEventListeners(){
+  document.querySelectorAll(".favorite-button").forEach(button =>{
+    button.addEventListener("click", function(){
+      console.log("button clicked");
+      let museumId= this.getAttribute("data-id");
+      updateFavorites(museumId);
+    });
+  });
+}
+
+}); 
+
+function addDetailsEventListener(){
+  document.querySelectorAll(".details").forEach(button=>{
+    button.addEventListener("click",function(){
+      let sectionId= parseInt(this.getAttribute("data-id"),10);
+      if(sectionId===1){
+        window.location.href= 'artMuseums.html';
+      } else if (sectionId ===2){
+        window.location.href='educationalMuseums.html';
+      } else if(sectionId===3){
+        window.location.href='memorabiliaMuseums.html';
+      }
+    });
+  });
+}
+
+
+
+
+// Carousel Function 
+// Must update to change automatically yet allow the user to change the image by swiping or clicking
+
+// let heroIndex=0;
+// changeSlide();
+
+// function changeSlide() {
+//   let i;
+//   const carousel = document.getElementsByClassName("hero-images");
+//   let dots= document.getElementsByClassName("indicator");
+//   for(i=0; i<carousel.length; i++){
+//     carousel[i].style.display="none";
+//   }
+//   heroIndex++;
+
+//   if(heroIndex > carousel.length){
+//    heroIndex=1;
+//   }
+//   for (i=0; i<dots.length; i++){
+//     dots[i].className= dots[i].className.replace("active","");
+//   }
+//  carousel[heroIndex-1].style.display="block";
+//  dots[heroIndex-1].className+="active";
+//  setTimeout(changeSlide,1000); //  changes it every second
+
+// }
+ 
+
