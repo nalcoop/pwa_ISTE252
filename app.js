@@ -286,6 +286,10 @@ document.addEventListener("DOMContentLoaded", function(){
     loadMuseums();
   }
 
+  if(currentPage==='index.html'){
+    createSection();
+  }
+
   function updateFavorites(museumId){
       let index= favorites.indexOf(museumId);
       if(index ===-1){
