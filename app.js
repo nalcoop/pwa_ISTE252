@@ -19,7 +19,7 @@ if ("serviceWorker" in navigator) {
   request.onerror = function (event) {
     console.error("Database error: " + event.target.error);
   };
-  
+  S
   request.onsuccess = function (event) {
     db = event.target.result;
     console.log("Database opened successfully");
@@ -29,7 +29,7 @@ if ("serviceWorker" in navigator) {
     db = event.target.result;
     if(!db.objectStoreNames.contains("museumData")){
       const objectStore = db.createObjectStore("museumData", {keyPath: "id",});
-      objectStore.currentIndex("name","Name",{unique:false});
+      objectStore.createIndex("name","Name",{unique:false});
     }   
   };
   
@@ -281,7 +281,7 @@ document.addEventListener("DOMContentLoaded", function(){
     createMuseums();
   }
 
- 
+  let currentPage= window.location.pathname.split("/").pop();
   if(currentPage === "favorites.html"){
     loadFavorites();
   } else{
@@ -387,22 +387,32 @@ document.addEventListener("DOMContentLoaded", function(){
           let prevButton= slideshow.querySelector(".prev");
           let nextButton= slideshow.querySelector(".next");
 
+
+          if(slides.length===0)return;
+          let currentIndex=0;
+          slides[currentIndex].classList.add("active","fade");
+
           if(slides.length<=1){
             if(prevButton) prevButton.style.display="none";
             if(nextButton) nextButton.style.display="none";
             return;
           }
 
-          if(slides.length===0)return;
+        
          
-          let currentIndex=0;
-          slides[currentIndex].classList.add("active","fade");
+    
 
           
          
           function showSlide(index){
-            slides.forEach(slide=> slide.classList.remove("active","fade"));
+            slides.forEach((slide)=>{
+              slide.classList.remove("active","fade");
+              slides.style.opacity=0;
+            });
             slides[index].classList.add("active","fade");
+            slides.style.opacity=1;
+      
+         
           }
           function nextSlide(){
             currentIndex=(currentIndex+1) % slides.length;
@@ -419,11 +429,15 @@ document.addEventListener("DOMContentLoaded", function(){
             clearInterval(interval);
             interval=setInterval(nextSlide,2500);
           }
-          if(prevButton && nextButton){
+
+          if(prevButton && !prevButton.dataset.listener){
+            prevButton.dataset.listener="true";
             prevButton.addEventListener("click",()=>{
               prevSlide();
               resetInterval();
             });
+          }
+          if(nextButton && !nextButton.dataset.listener){
             nextButton.addEventListener("click",()=>{
               nextSlide();
               resetInterval();
