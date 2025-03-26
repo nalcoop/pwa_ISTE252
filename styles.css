@@ -144,7 +144,6 @@ header a {
 .specialityCard {
   display: flex;
   flex-direction: column;
-  align-items: center;
   background-color: #F9EAE1;
   padding: 20px;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
@@ -152,6 +151,11 @@ header a {
   margin: 20px;
   border-radius: 10px;
 }
+.card > .slideshow,
+.specialityCard >.slideshow {
+  align-items: center;
+}
+
 
 #speciality-list, #museum-list{
   margin-top: 1rem;
@@ -224,7 +228,6 @@ header a {
   background-color: #1B2F33;
   color:#F9EAE1;
   border: none;
-  padding: 10px 15px;
   cursor: pointer;
   border-radius: 5px;
   font-size: 16px;
@@ -335,7 +338,12 @@ footer nav ul ul {
   #navbar{
     font-size:1.4em;
   }
-
+  p {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    line-height: 1.75;
+    text-align: left;
+  }
 }
 
 @media screen and (max-width: 1560px) and (max-width:800px){

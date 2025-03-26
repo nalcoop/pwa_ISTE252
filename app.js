@@ -51,11 +51,11 @@ channel.onmessage = (event) => {
 let hamburger = document.getElementById("hamburger");
 let menu = document.querySelector("header nav>ul");
 hamburger.addEventListener("click", () => {
-  menu.classList.toggle("notransition");
+  menu.classList.toggle(".notransition");
   menu.classList.toggle("display");
   //Wait for transition to finish
   setTimeout(() => {
-    menu.classList.toggle("notransition");
+    menu.classList.toggle(".notransition");
   }, 600);
 });
 
