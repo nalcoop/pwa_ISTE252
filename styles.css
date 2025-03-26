@@ -31,8 +31,6 @@ a {
 
 h1,
 h2,
-h3,
-h4,
 .favorite-button,
 .details,#navbar a {
   font-family: "Raleway", sans-serif;
@@ -40,7 +38,7 @@ h4,
   text-align: center;
 }
 
-h3 {
+h3,h4 {
   font-size: 1.5em;
   text-align: left;
 }
@@ -79,7 +77,7 @@ header a {
   position: fixed;
   height:100px;
   justify-content: space-between;
-  width: 100vw;
+  width:100%;
   display:flex;
   top:0;
   left:0;
@@ -122,18 +120,18 @@ header a {
   overflow: hidden;
   width: 100vw;
   height: 0;
-  transition: height 0.6s ease-in-out;
+  transition: max-height 0.6s ease-in-out;
 }
 
 .dropdown.display {
-  height: 100%;
+  max-height: 100%;
 }
 
 .dropdown>ul {
   /* display: none; */
   position: absolute;
   width: 100vw;
-  background-color: #a0b5bd;
+  background-color: #acacb1;
   flex-direction: row;
   gap: 25px;
   padding: 25px 0;
@@ -150,7 +148,7 @@ header a {
   background-color: #F9EAE1;
   padding: 20px;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.4s ease-in-out;
   margin: 20px;
   border-radius: 10px;
 }
@@ -333,6 +331,9 @@ footer nav ul ul {
     right: 100px;
     transform: translateY(-50%);
     display: none;
+  }
+  #navbar{
+    font-size:1.4em;
   }
 
 }

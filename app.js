@@ -51,11 +51,11 @@ channel.onmessage = (event) => {
 let hamburger = document.getElementById("hamburger");
 let menu = document.querySelector("header nav>ul");
 hamburger.addEventListener("click", () => {
-  menu.classList.toggle(".notransition");
+  menu.classList.toggle("notransition");
   menu.classList.toggle("display");
   //Wait for transition to finish
   setTimeout(() => {
-    menu.classList.toggle(".notransition");
+    menu.classList.toggle("notransition");
   }, 600);
 });
 
@@ -101,10 +101,6 @@ for (let i = 0; i < len; i++) {
 }
 
 // fix template for the museums
-// gather content ideas
-// FIX THISSSSS
-
-// create the template pwa_ISTE252\assets\images\walters-art-1.jpg
 const museum = {
   museums: [
     {
@@ -323,6 +319,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function loadMuseums() {
     //based on page
     let currentPage = window.location.pathname.split("/").pop();
+  
     if (currentPage === "artMuseums.html") {
       filterPages = museum.museums.filter((museum) => museum.type === "Art");
     } else if (currentPage === "educationalMuseums.html") {
@@ -335,10 +332,7 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     } else if (currentPage === "favorites.html") {
       let favoriteIds = JSON.parse(localStorage.getItem("favorites")) || [];
-      if(favoriteIds.length === 0){
-        `<h1> Add some favorites to display here. </h1>`;
-        console.log("no favorites");
-      }
+
       filterPages = museum.museums.filter((museum) =>
         favoriteIds.includes(museum.id.toString())
       );
@@ -350,12 +344,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function loadFavorites() {
     let favoriteIds = JSON.parse(localStorage.getItem("favorites")) || [];
+    let container=document.getElementById("museum-list");
     if (!museum || !museum.museums) {
       console.error("Museum data not loaded");
+    }
+    if(favoriteIds.length === 0){
+      container.innerHTML=`<h1 class="no favorites"> Add some favorites to display here. </h1>`;
+      console.log("no favorites");
+      return;
     }
     filterPages = museum.museums.filter((museum) =>
       favoriteIds.includes(museum.id.toString())
     );
+    container.innerHTML=`<h1 class="favorites">Favorites List </h1>`;
     createMuseums();
     console.log("creating favorite");
   }
@@ -404,7 +405,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ${images.map((imgSrc, index) => `<img src= "${imgSrc}" class="slide  ${index === 0 ? 'active' : ''}"/>`).join("")}
         </div>
          <h1 class="name"> ${sectionItem.name}</h1>
-         <h3 class="property-name">${sectionItem.description} </h3>
+         <p class="property-name"><strong>${sectionItem.description}</strong> </p>
          <button class="details" data-id="${sectionItem.id}">Learn More</button>
          </div>`;
     });
