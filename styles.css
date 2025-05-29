@@ -135,7 +135,7 @@ header a {
   flex-direction: row;
   gap: 25px;
   padding: 25px 0;
-  right: 0;
+  left: 0;
 }
 
 /*  Cards */
@@ -296,7 +296,7 @@ footer nav ul ul {
   }
 
   #navbar li:first-child {
-    margin-left: 0;
+    margin-right: 0;
   }
 
   #navbar nav>ul.display {
