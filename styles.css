@@ -150,6 +150,7 @@ header a {
   transition: transform 0.4s ease-in-out;
   margin: 20px;
   border-radius: 10px;
+  box-sizing: border-box;
 }
 .card > .slideshow,
 .specialityCard >.slideshow {
