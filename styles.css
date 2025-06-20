@@ -150,12 +150,18 @@ header a {
   transition: transform 0.4s ease-in-out;
   margin: 20px;
   border-radius: 10px;
-  box-sizing: border-box;
 }
 .card > .slideshow,
 .specialityCard >.slideshow {
   align-items: center;
 }
+.card > .slideshow> img,
+.specialityCard >.slideshow>img {
+  align-items: center;
+  box-sizing: content-box;
+}
+
+
 
 
 #speciality-list, #museum-list{
@@ -177,8 +183,9 @@ header a {
 /* Slides */
 .slide {
   display: none;
-  max-width:100%;
-  max-height: auto;
+  box-sizing: content-box;
+  width:100%;
+  max-height: fit-content;
   transition: opacity 1.5s ease-in-out;
 }
 
