@@ -441,12 +441,14 @@ document.addEventListener("DOMContentLoaded", function () {
             <button class="next" data-id="${museumItem.id}">&#10095;</button>
         </div>
             <h1 class="name"> ${museumItem.Name}</h1>
-            <h3 class="property-name"> Address: ${museumItem.Address} </h3>
-            <h3 class="property-name"> Website: <a href="${
-              museumItem.Website
-            }" target="_blank">${museumItem.Website}</a></h3>
+            <div class="property-info">
+            <h4 class="property-name"> Address:</h4>
+            <address> ${museumItem.Address}</address> 
+            <br>
+            <h4 class="property-name"> Website: </h4>
+            <a href="${museumItem.Website}" target="_blank">${museumItem.Website}</a>
             <p class="about"> ${museumItem["Brief Description"]} </p>
-        
+            </div>
         <button class="favorite-button" data-id="${museumItem.id}"> ${
         isFavorited ? "Remove from Favorites" : "Add to Favorites"
       }</button>

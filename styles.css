@@ -27,6 +27,7 @@ div,
 li,
 a {
   font-family: "Merriweather", serif;
+  font-style: normal;
 }
 
 h1,
@@ -138,6 +139,11 @@ header a {
 
 /*  Cards */
 
+.property-name, address, a{
+  display: inline-block;
+  margin-right: 10px;
+}
+
 .card,
 .specialityCard {
   display: flex;
@@ -148,16 +154,14 @@ header a {
   transition: transform 0.4s ease-in-out;
   margin: 20px;
   border-radius: 10px;
+  box-sizing: content-box;
 }
 .card > .slideshow,
 .specialityCard >.slideshow {
   align-items: center;
-}
-.card > .slideshow> img,
-.specialityCard >.slideshow>img {
-  align-items: center;
   box-sizing: content-box;
 }
+
 
 
 
@@ -172,8 +176,9 @@ header a {
 /* fix images in figma if need be */
 .slideshow {
   position: relative;
-  max-width: 100%;
-  max-height: 75%;
+  max-width: fit-content;
+  max-height: fit-content;
+  object-fit: contain;
   margin: auto;
   overflow: hidden;
 }
@@ -181,17 +186,16 @@ header a {
 /* Slides */
 .slide {
   display: none;
-  box-sizing: content-box;
-  max-width:min-content;
-  max-height: min-content;
+  max-width: 75%;
+  max-height: 75%;
+  margin: auto;
+  align-items: center;
   transition: opacity 1.5s ease-in-out;
 }
 
 .slide.active {
   display: block;
   opacity: 1;
-  max-width:fit-content;
-  max-height: fit-content;
 }
 
 /* Fade effect */
@@ -344,10 +348,9 @@ footer nav ul ul {
     display: none;
   }
   #navbar nav a, .favorite-button, .details{
-    font-size:1.5em;
+    font-size:1.25em;
   }
   p {
-    font-size: 1.6em;
     margin-bottom: 20px;
     line-height: 1.75;
     text-align: left;
